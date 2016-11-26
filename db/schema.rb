@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126052053) do
+ActiveRecord::Schema.define(version: 20161126055346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "employee_participations", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "study_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["employee_id"], name: "index_employee_participations_on_employee_id", using: :btree
+    t.index ["study_id"], name: "index_employee_participations_on_study_id", using: :btree
+  end
 
   create_table "employees", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -29,20 +38,18 @@ ActiveRecord::Schema.define(version: 20161126052053) do
     t.index ["manager_id"], name: "index_leadings_on_manager_id", using: :btree
   end
 
-  create_table "managers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "study_id"
-    t.index ["study_id"], name: "index_managers_on_study_id", using: :btree
-  end
-
-  create_table "participations", force: :cascade do |t|
+  create_table "manager_participations", force: :cascade do |t|
     t.integer  "manager_id"
     t.integer  "study_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["manager_id"], name: "index_participations_on_manager_id", using: :btree
-    t.index ["study_id"], name: "index_participations_on_study_id", using: :btree
+    t.index ["manager_id"], name: "index_manager_participations_on_manager_id", using: :btree
+    t.index ["study_id"], name: "index_manager_participations_on_study_id", using: :btree
+  end
+
+  create_table "managers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "researchers", force: :cascade do |t|
@@ -76,10 +83,11 @@ ActiveRecord::Schema.define(version: 20161126052053) do
     t.string   "type"
   end
 
+  add_foreign_key "employee_participations", "studies"
+  add_foreign_key "employee_participations", "users", column: "employee_id"
   add_foreign_key "leadings", "users", column: "employee_id"
   add_foreign_key "leadings", "users", column: "manager_id"
-  add_foreign_key "managers", "studies"
-  add_foreign_key "participations", "studies"
-  add_foreign_key "participations", "users", column: "manager_id"
+  add_foreign_key "manager_participations", "studies"
+  add_foreign_key "manager_participations", "users", column: "manager_id"
   add_foreign_key "studies", "users", column: "researcher_id"
 end

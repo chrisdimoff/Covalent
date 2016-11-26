@@ -4,7 +4,7 @@ class Manager < User
 
   # belongs_to :study
 
-  has_one :manager_involvement, foreign_key: :manager_id, class_name: 'Participation'
+  has_one :manager_involvement, foreign_key: :manager_id, class_name: 'ManagerParticipation'
   has_one :study, through: :manager_involvement, source: :study
 
 end
