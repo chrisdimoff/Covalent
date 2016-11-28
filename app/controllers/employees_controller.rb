@@ -8,6 +8,9 @@ class EmployeesController < ApplicationController
     uri    = URI.parse(url)
     if uri.query.present?
        request_params = CGI.parse(uri.query)
+       study_id = request_params['id'].first.to_i
+       study = Study.find study_id
+       @managers = study.managers
        @company = request_params['company'].first
     end
     @employee = Employee.new
