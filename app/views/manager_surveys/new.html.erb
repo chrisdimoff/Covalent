@@ -1,0 +1,20 @@
+<h1>new campaign</h1>
+
+<%= simple_form_for (@manager_survey), :url => new_study_manager_survey_path do |f|%>
+  <div class="form-group">
+    <%= f.label :form_name %>
+    <%= f.text_field :form_name, class: "form-control" %>
+  </div>
+
+  <%= f.simple_fields_for :mc_questions do |r| %>
+    <%= render 'mc_question_fields', f:r %>
+
+  <% end %>
+
+  <div class="links">
+      <%= link_to_add_association 'Add Question', f, :mc_questions %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>

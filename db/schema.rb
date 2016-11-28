@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20161128191342) do
   end
 
   create_table "mc_questions", force: :cascade do |t|
-    t.string   "name"
+    t.text     "body"
     t.integer  "manager_survey_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false

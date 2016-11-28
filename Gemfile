@@ -8,6 +8,8 @@ source 'https://rubygems.org'
 gem 'bootstrap-sass', '~>3.3'
 gem 'bootstrap-modal-rails'
 gem 'bootstrap-select-wrapper-rails'
+gem 'simple_form'
+gem 'cocoon'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
