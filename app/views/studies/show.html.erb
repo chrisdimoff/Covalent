@@ -84,12 +84,13 @@
       </div>
       <div class="panel-body">
 
-      
+
 
             <div class="btn-group-vertical" style="width: 100%;">
 
 
               <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
+              <%= link_to "Create Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default", method: :get %>
 
               <button class="btn btn-default">Create Manager Form</button>
               <button class="btn btn-default"> View/Edit Manager Form</button>
