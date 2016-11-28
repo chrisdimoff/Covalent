@@ -1,7 +1,7 @@
 
- <%= link_to new_user_url(company: @study.company, id: @study.id)%>
 
-<div id="modal-window" class="modal  fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 </div>
 
@@ -90,7 +90,6 @@
 
               <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
 
-              <button class="btn btn-default" action=<%= manager_link_path %>>Generate Manager Sign Up Link</button>
               <button class="btn btn-default">Create Manager Form</button>
               <button class="btn btn-default"> View/Edit Manager Form</button>
             </div>
@@ -120,5 +119,7 @@
       $(this).css('cursor','pointer');
 
     })
+
+
 
   </script>

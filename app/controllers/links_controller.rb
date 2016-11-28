@@ -9,6 +9,12 @@ class LinksController < ApplicationController
     end
   end
 
-  def employee
+  def manager
+
+    @study = Study.find params[:study]
+    respond_to do |format|
+      format.html
+      format.js {render :employee}
+    end
   end
 end
