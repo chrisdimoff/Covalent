@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'links/manager' => 'links#manager', as: :manager_link
 
-  get 'links/employee'
+  get 'links/employee' => 'links#employee', as: :employee_link
 
   resources :studies
   resources :managers, only: [:show, :new, :create, :destroy]

@@ -9,7 +9,7 @@ class LinksController < ApplicationController
     end
   end
 
-  def manager
+  def employee
 
     @study = Study.find params[:study]
     respond_to do |format|

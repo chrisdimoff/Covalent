@@ -22,6 +22,8 @@ class ManagersController < ApplicationController
     @manager = Manager.new manager_params
     @manager.study = Study.find study_id
 
+
+
     if @manager.save
       session[:user_id] = @manager.id
       redirect_to root_path, notice: 'Thank you for signing up'

@@ -5,40 +5,43 @@
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
       <h1>Sign Up</h1>
       <%= @employee.errors.full_messages.join(', ') %>
-      <%= form_for @employee do |f| %>
+      <%= form_tag('/employees', method: "Post") %>
         <div class="form-group">
-          <%= f.label :manager %>
-          <%= f.select(
+          <%= label_tag :manager %>
+          <%= select_tag(
             :manager,
             options_from_collection_for_select(Manager.all, :id, :full_name),
-            { },
+
             { 'data-width' => "100%",
               :class => "selectpicker",
               'data-live-search' => true,
               'title' => "Choose your manager"}) %>
 
         </div>
+
         <div class="form-group">
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name, class: "form-control" %>
+          <%= label_tag :first_name %>
+          <%= text_field_tag :first_name, "", class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name, class: "form-control" %>
+          <%= label_tag :last_name %>
+          <%= text_field_tag :last_name, "", class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, class: "form-control" %>
+          <%= label_tag :email %>
+          <%= email_field_tag :email, "", class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: "form-control" %>
+          <%= label_tag :password %>
+          <%= password_field_tag :password, "", class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, class: "form-control" %>
+          <%= label_tag :password_confirmation %>
+          <%= password_field_tag :password_confirmation, "", class: "form-control" %>
         </div>
-        <%= f.submit class: "btn btn-default" %>
-      <% end %>
+
+
+        <%= submit_tag "Sign Up", class: "btn btn-default", style: "width: 50%;" %>
+
     </div>
   </div>

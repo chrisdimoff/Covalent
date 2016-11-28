@@ -1,17 +1,17 @@
 <div class="modal-header">
    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-   <h3 id="myModalLabel">Manager Sign Up Link</h3>
+   <h3 id="myModalLabel">Employee Sign Up Link</h3>
  </div>
  <div class="modal-body">
-   Send this sign up link to the managers you want to participate in the study.
+   <p>
+     Send this sign up link to the employees you want to participate in the study.
+   </p>
+   <div class="form-group">
+     <input type="text" class="form-control" id="link-display" >
+       <button class="btn btn-default" type="submit" id="copy">Copy to Clipboard</button>
+   </div>
 
-    <div class="form-group">
-      <input type="text" class="form-control" id="link-display" >
-    </div>
-    <button class="btn btn-default" type="submit" id="copy">Copy to Clipboard</button>
-
-
-  <span style="display:none;"><%= link_to new_manager_url(company: @study.company, id: @study.id)%></span>
+     <span style="display:none;"><%= link_to new_employee_url(company: @study.company, id: @study.id)%></span>
 
  </div>
  <div class="modal-footer">

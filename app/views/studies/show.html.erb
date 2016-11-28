@@ -96,8 +96,8 @@
 
 
             <div class="btn-group-vertical" style="width: 100%;">
+              <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
 
-              <button class="btn btn-default">Generate Employee Sign Up Link</button>
               <button class="btn btn-default">Create Employee Form</button>
               <button class="btn btn-default"> View/Edit Employee Form</button>
             </div>
