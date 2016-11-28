@@ -1,0 +1,2 @@
+module ManagerSurveysHelper
+end

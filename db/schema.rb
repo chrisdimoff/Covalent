@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161127222156) do
+ActiveRecord::Schema.define(version: 20161128184538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20161127222156) do
     t.datetime "updated_at", null: false
     t.index ["manager_id"], name: "index_manager_participations_on_manager_id", using: :btree
     t.index ["study_id"], name: "index_manager_participations_on_study_id", using: :btree
+  end
+
+  create_table "manager_surveys", force: :cascade do |t|
+    t.string   "form_name"
+    t.integer  "study_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_id"], name: "index_manager_surveys_on_study_id", using: :btree
   end
 
   create_table "managers", force: :cascade do |t|
@@ -90,5 +98,6 @@ ActiveRecord::Schema.define(version: 20161127222156) do
   add_foreign_key "leadings", "users", column: "manager_id"
   add_foreign_key "manager_participations", "studies"
   add_foreign_key "manager_participations", "users", column: "manager_id"
+  add_foreign_key "manager_surveys", "studies"
   add_foreign_key "studies", "users", column: "researcher_id"
 end

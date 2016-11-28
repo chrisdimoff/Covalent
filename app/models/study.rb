@@ -11,4 +11,6 @@ class Study < ApplicationRecord
   has_many :managers, through: :manager_participations, source: :manager
 
   has_many :employees, through: :employee_participations, source: :employee
+
+  has_one :manager_survey
 end
