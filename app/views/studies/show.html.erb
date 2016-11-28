@@ -1,0 +1,124 @@
+
+ <%= link_to new_user_url(company: @study.company, id: @study.id)%>
+
+<div id="modal-window" class="modal  fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+
+
+<div class ="row">
+  <div class="col-sm-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Managers - <%= @study.managers.count %> / <%= @study.num_of_managers %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </div>
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th># of Employees</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @study.managers.each do |mgr| %>
+
+
+          <tr data-link=<%= manager_path(mgr.id) %>>
+            <td> <%= mgr.id %></td>
+            <td> <%= mgr.first_name %>   </td>
+            <td> <%= mgr.last_name %>   </td>
+            <td> <%= mgr.employees.count %>   </td>
+          </tr>
+
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Employees -  <%= @study.employees.count %> / <%= @study.num_of_employees %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </div>
+      <table class="table table-striped table-condensed">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Manager</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @study.employees.each do |emp| %>
+
+
+          <tr data-link=<%= employee_path(emp.id) %>>
+            <td> <%= emp.id %></td>
+            <td> <%= emp.first_name %>   </td>
+            <td> <%= emp.last_name %>   </td>
+            <td> <%= emp.manager.full_name %>   </td>
+          </tr>
+
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Actions
+        </h3>
+      </div>
+      <div class="panel-body">
+
+
+            <div class="btn-group-vertical" style="width: 100%;">
+
+
+              <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
+
+              <button class="btn btn-default" action=<%= manager_link_path %>>Generate Manager Sign Up Link</button>
+              <button class="btn btn-default">Create Manager Form</button>
+              <button class="btn btn-default"> View/Edit Manager Form</button>
+            </div>
+
+
+            <div class="btn-group-vertical" style="width: 100%;">
+
+              <button class="btn btn-default">Generate Employee Sign Up Link</button>
+              <button class="btn btn-default">Create Employee Form</button>
+              <button class="btn btn-default"> View/Edit Employee Form</button>
+            </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+    $("tr[data-link]").click(function() {
+      window.location = $(this).data("link")
+    })
+    $("tr[data-link]").hover(function() {
+      $(this).css('cursor','pointer');
+
+    })
+
+  </script>

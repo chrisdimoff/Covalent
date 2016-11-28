@@ -47,19 +47,37 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign Up <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Researcher", new_session_path %></li>
+                <li><%= link_to "Researcher", new_researcher_path %></li>
                 <li><%= link_to "Participant", new_user_path %></li>
               </ul>
             </li>
 
           </ul>
         <% end %>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid">
+      <% if notice || alert %>
+        <%# the ternary is used to set the alert type based on whether we received
+        notification or an alert %>
+        <div
+          class="alert alert-<%= notice ? 'success' : 'danger'%> alert-dismissable"
+          role="alert">
+          <%= notice || alert %>
 
+          <%# add x button to close notification element %>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
 
-
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <h1>Create Study</h1>
+    <%= @study.errors.full_messages.join(', ') %>
+    <%= form_for @study do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :company %>
+        <%= f.text_field :company, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :number_of_managers %>
+        <%= f.number_field :num_of_managers, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :number_of_employees %>
+        <%= f.number_field :num_of_employees, class: "form-control" %>
+      </div>
+
+      <%= f.submit class: "btn btn-default" %>
+    <% end %>
+  </div>
+</div>

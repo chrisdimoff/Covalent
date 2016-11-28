@@ -1,0 +1,38 @@
+<div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+   <h3 id="myModalLabel">Manager Sign Up Link</h3>
+ </div>
+ <div class="modal-body">
+
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="link-display" >
+
+    </div>
+    <button class="btn btn-default" type="submit" id="copy">Copy to Clipboard</button>
+
+
+  <span style="display:none;"><%= link_to new_manager_url(company: @study.company, id: @study.id)%></span>
+
+ </div>
+ <div class="modal-footer">
+   <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+ </div>
+
+
+<script>
+
+    var link = $('span a').html()
+    $('#link-display').val(link)
+
+    $('#copy').click(function () {
+      console.log('clicked')
+      $('#link-display').select()
+      document.execCommand('copy')
+    })
+    // document.querySelector("#visible-input").select();
+    // // Copy to the clipboard
+    // document.execCommand('copy');
+
+
+</script>

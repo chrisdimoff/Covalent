@@ -1,0 +1,24 @@
+// Place all the styles related to the studies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+span.glyphicon-file {
+  display: block;
+  font-size: 3rem;
+  text-align: center;
+}
+
+div.well {
+  margin: 0;
+}
+
+a .panel {
+  text-decoration: none;
+  color:black;
+}
+
+.panel-body .btn-group-vertical:first-child {
+  margin-bottom: 10px;
+}

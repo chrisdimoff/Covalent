@@ -1,0 +1,66 @@
+
+
+<div class='container-fluid'>
+  <div class="row">
+    <div class=" col-xs-2 col-xs-offset-2 col-md-2 col-md-offset-6">
+
+      <%= button_to "Create Study", new_study_path, class: "btn btn-default pull-right", method: :get%>
+
+    </div>
+    <div class="col-xs-8 col-md-4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+
+  </div>
+</div>
+
+
+
+<h1>Studies#index</h1>
+<p>Find me in app/views/studies/index.html.erb</p>
+
+
+<div class="row">
+  <div class="col-xs-12 ">
+
+    <% @studies.each do |study| %>
+    <%= link_to study_path(study.id) do %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= study.title %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="container-fluid">
+
+          <div class ="row">
+            <div class="col-sm-1 ">
+              <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            </div>
+            <div class="col-sm-2 col-sm-offset-1">
+              <%= study.status %>
+            </div>
+            <div class="hidden-xs col-sm-3">
+              % RESPONDED HERE
+            </div>
+            <div class="hidden-xs col-sm-3">
+            % REGISTERED HERE
+
+            </div>
+
+            <div class="col-sm-1">
+              DETAILS
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>

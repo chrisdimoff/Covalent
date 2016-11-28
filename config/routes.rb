@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :sessions
+
+  get 'links/manager' => 'links#manager', as: :manager_link
+
+  get 'links/employee'
+
+  resources :studies
+  resources :managers, only: [:show, :new, :create, :destroy]
+  resources :sessions, only: [:show, :new, :create, :destroy]
+  resources :employees, only: [:show, :new, :create, :destroy]
   resources :researchers
   resources :users
 
