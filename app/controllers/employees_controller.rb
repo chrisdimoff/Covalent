@@ -39,7 +39,6 @@ class EmployeesController < ApplicationController
     @employee = Employee.new employee_params
     @employee.manager = @manager
 
-    byebug
     @employee.study = Study.find study_id
 
     if @employee.save
