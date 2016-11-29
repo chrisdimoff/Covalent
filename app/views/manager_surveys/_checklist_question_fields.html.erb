@@ -1,12 +1,20 @@
 <div class="checkbox-container" >
   <hr />
-  <%= f.label "Checklist Question Body" %>
-  <%= f.text_field :kind, value: "checklist", class: "hidden"%>
-  <%= f.text_field :body, class: "form-control" %>
+  <div class="panel panel-default">
+    <div class="panel-body">
 
-  <%= link_to_remove_association("Remove Question", f, wrapper_class: 'checkbox-container' ) %>
-  <%= link_to_add_association'Add Check Item', f, :options, partial: 'manager_surveys/options/checklist_option_fields',
-  'data-association-insertion-method' => 'append'
-  %>
+      <%#= f.label "Checklist Question Body" %>
+      <%= f.text_field :kind, value: "checklist", class: "hidden"%>
+      <%= f.text_field :body, class: "form-control", placeholder: "Checklist Question Body Here" %>
+
+      <br />
+      <%= link_to_add_association'Add Check Item', f, :options, partial: 'manager_surveys/options/checklist_option_fields',
+      'data-association-insertion-method' => 'append', class: "btn btn-default"
+      %>
+      <%= link_to_remove_association("Remove Question", f, wrapper_class: 'checkbox-container', class: "btn btn-default" ) %>
+
+      <br />
+    </div>
+  </div>
 
 </div>
