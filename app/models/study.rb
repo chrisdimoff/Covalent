@@ -12,5 +12,5 @@ class Study < ApplicationRecord
 
   has_many :employees, through: :employee_participations, source: :employee
 
-  has_one :manager_survey
+  has_many :manager_surveys, dependent: :destroy
 end

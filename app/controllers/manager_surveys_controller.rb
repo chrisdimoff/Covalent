@@ -7,11 +7,13 @@ class ManagerSurveysController < ApplicationController
 
   def create
     survey_params = params.require(:manager_survey)
-                        .permit([ :form_name,
-                                  :id,
-                                  :_destroy,
-                                  { mc_questions_attributes:
-                                                      [:body, :manager_survey_id] }])
+        .permit([ :form_name,
+                  :id,
+                  :_destroy,
+                  { questions_attributes:
+                                      [:body,
+                                       :kind,
+                                       :manager_survey_id] }])
 
     byebug
 
@@ -19,6 +21,7 @@ class ManagerSurveysController < ApplicationController
 
       study_id = params.permit(:study_id)['study_id'].to_i
       study = Study.find study_id
+      
       @manager_survey = ManagerSurvey.new survey_params
       @manager_survey.study = study
       # @manager_survey.mc_questions.map {|mc| mc.update_attributes(manager_survey_id: @manager_survey)}

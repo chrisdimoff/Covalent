@@ -7,13 +7,13 @@
     <%= f.text_field :form_name, class: "form-control" %>
   </div>
 
-  <%= f.simple_fields_for :mc_questions do |r| %>
-    <%= render 'mc_question_fields', f:r %>
 
-  <% end %>
+
+
 
   <div class="links">
-      <%= link_to_add_association 'Add Question', f, :mc_questions %>
+      <%= link_to_add_association 'Add Matrix Question', f, :questions, partial: 'manager_surveys/matrix_question_fields' %>
+      <%= link_to_add_association 'Add MC Question', f, :questions, partial: 'manager_surveys/mc_question_fields' %>
   </div>
 
   <%= f.submit %>
