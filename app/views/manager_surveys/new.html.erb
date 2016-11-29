@@ -1,18 +1,41 @@
-<h1>Manager Form</h1>
 
-<% @study = params['study_id'].to_i %>
-<%= simple_form_for (@manager_survey), :url => study_manager_surveys_path(@study) do |f|%>
-  <div class="form-group">
-    <%= f.label :form_name %>
-    <%= f.text_field :form_name, class: "form-control" %>
+<div class="row">
+  <div class="col-sm-9 ">
+
+    <% @study = params['study_id'].to_i %>
+    <%= simple_form_for (@manager_survey), :url => study_manager_surveys_path(@study) do |f|%>
+    <div class="form-group">
+      <%= f.label :form_name %>
+      <%= f.text_field :form_name, class: "form-control" %>
+    </div>
+
+    <div class="form">
+
+    </div>
+
+
+    <%= f.submit class: "btn btn-default" %>
+
+
   </div>
 
-  <div class="links">
-      <%= link_to_add_association 'Add Matrix Question', f, :questions, partial: 'manager_surveys/matrix_question_fields' %>
-      <%= link_to_add_association 'Add MC Question', f, :questions, partial: 'manager_surveys/mc_question_fields' %>
-      <%= link_to_add_association 'Add Checklist Question', f, :questions, partial: 'manager_surveys/checklist_question_fields' %>
+  <div class="col-sm-3 ">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Add Question Types
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="btn-group-vertical">
+
+          <%= link_to_add_association 'Add Matrix Question', f, :questions, partial: 'manager_surveys/matrix_question_fields', 'data-association-insertion-node' => ".form", class: 'btn btn-default'%>
+
+          <%= link_to_add_association 'Add MC Question', f, :questions, partial: 'manager_surveys/mc_question_fields', 'data-association-insertion-node' => ".form", class: 'btn btn-default' %>
+          <%= link_to_add_association 'Add Checklist Question', f, :questions, partial: 'manager_surveys/checklist_question_fields', 'data-association-insertion-node' => ".form", class: 'btn btn-default' %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <%= f.submit class: "btn btn-default" %>
-
+</div>
 <% end %>
