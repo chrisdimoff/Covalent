@@ -14,7 +14,7 @@ class ManagerSurveysController < ApplicationController
                                       [:body,
                                        :kind,
                                        :manager_survey_id,
-                                       {options_attributes: [:content]}
+                                       {options_attributes: [:content, :id, :_destroy]}
 
                                        ] }])
 
@@ -35,5 +35,10 @@ class ManagerSurveysController < ApplicationController
         puts @manager_survey.errors.full_messages
         render :new
       end
+  end
+
+  def show
+    @manager_survey = ManagerSurvey.find params[:id]
+
   end
 end
