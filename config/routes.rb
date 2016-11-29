@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :studies do
     resources :manager_surveys
   end
-  resources :managers, only: [:show, :new, :create, :destroy]
+  resources :managers, only: [:show, :new, :create, :destroy] do
+    resources :manager_entries, only: [:show, :new, :create, :destroy, :index]
+  end
   resources :sessions, only: [:show, :new, :create, :destroy]
   resources :employees, only: [:show, :new, :create, :destroy]
   resources :researchers

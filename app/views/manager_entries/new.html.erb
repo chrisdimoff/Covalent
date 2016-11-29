@@ -1,0 +1,56 @@
+<h1>Hello, <%= @manager.first_name.capitalize %> </h1>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post %>
+
+      <% @survey.questions.each_with_index do |question, index| %>
+        <% q_num = index + 1 %>
+        <% if question.mc? %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%= q_num %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+            <div class="mc-options">
+              <% question.options.each do |option| %>
+              <div class="radio">
+                <label>
+                  <%= radio_button_tag "data[q#{q_num}][response]",  "#{option.content}" %>
+
+                   <%= option.content  %>
+                 </label>
+              </div>
+              <% end %>
+            </div>
+
+
+          </div>
+        </div>
+        <% elsif question.matrix? %>
+        <% elsif question.checklist? %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Question <%=index + 1 %></h3>
+            </div>
+            <div class="panel-body">
+              <%= question.body %>
+              <div class="checklist-options">
+
+                <% question.options.each do |option| %>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    <%= option.content %>
+                  </label>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <%= submit_tag %>
+  </div>
+</div>

@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20161129160750) do
     t.integer  "employee_id"
     t.integer  "manager_id"
     t.integer  "study_id"
-    t.json     "entry",       default: []
+    t.json     "content",     default: []
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["employee_id"], name: "index_entries_on_employee_id", using: :btree

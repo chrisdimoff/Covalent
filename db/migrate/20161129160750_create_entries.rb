@@ -4,7 +4,7 @@ class CreateEntries < ActiveRecord::Migration[5.0]
       t.references :employee, foreign_key: {to_table: :users}
       t.references :manager, foreign_key: {to_table: :users}
       t.references :study, foreign_key: true
-      t.json :entry, default: []
+      t.json :content, default: []
 
       t.timestamps
     end

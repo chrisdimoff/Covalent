@@ -1,0 +1,2 @@
+module ManagerEntriesHelper
+end
