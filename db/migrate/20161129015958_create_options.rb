@@ -1,6 +1,6 @@
-class CreateResponses < ActiveRecord::Migration[5.0]
+class CreateOptions < ActiveRecord::Migration[5.0]
   def change
-    create_table :responses do |t|
+    create_table :options do |t|
       t.references :question, foreign_key: true
 
       t.text :content

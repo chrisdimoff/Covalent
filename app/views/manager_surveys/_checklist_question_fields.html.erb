@@ -1,22 +1,21 @@
 <div class="checkbox-container" >
-
+  <hr />
   <%= f.label "Checklist Question Body" %>
   <%= f.text_field :kind, value: "checklist", class: "hidden"%>
   <%= f.text_field :body, class: "form-control" %>
 
   <%= link_to_remove_association "Remove Question", f %>
-  <%= link_to_add_association'Add Check Item', f, :responses, partial: 'manager_surveys/responses/checklist_response_fields',
-  'data-association-insertion-method' => 'append', class: "test"
+  <%= link_to_add_association'Add Check Item', f, :options, partial: 'manager_surveys/options/checklist_option_fields',
+  'data-association-insertion-method' => 'append'
   %>
 
-  <hr />
 </div>
 
 <script>
 
 $('.checkbox-container').on('cocoon:after-insert', function(e, insertedItem) {
   console.log(e)
-  console.log(insertedItem)
+  console.log(insertedItem.children('input[type="text"]').val())
   // var value = $('#data-field').last()val()
   // $('input[type="checkbox"]').last()val(value)
 });

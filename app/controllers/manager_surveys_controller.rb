@@ -14,11 +14,11 @@ class ManagerSurveysController < ApplicationController
                                       [:body,
                                        :kind,
                                        :manager_survey_id,
-                                       {responses_attributes: [:content]}
+                                       {options_attributes: [:content]}
 
                                        ] }])
 
-    byebug
+
 
 
 
