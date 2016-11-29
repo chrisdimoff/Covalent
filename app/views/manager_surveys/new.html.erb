@@ -7,10 +7,6 @@
     <%= f.text_field :form_name, class: "form-control" %>
   </div>
 
-
-
-
-
   <div class="links">
       <%= link_to_add_association 'Add Matrix Question', f, :questions, partial: 'manager_surveys/matrix_question_fields' %>
       <%= link_to_add_association 'Add MC Question', f, :questions, partial: 'manager_surveys/mc_question_fields' %>
