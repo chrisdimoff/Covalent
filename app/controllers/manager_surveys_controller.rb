@@ -13,7 +13,10 @@ class ManagerSurveysController < ApplicationController
                   { questions_attributes:
                                       [:body,
                                        :kind,
-                                       :manager_survey_id] }])
+                                       :manager_survey_id,
+                                       {responses_attributes: [:content]}
+
+                                       ] }])
 
     byebug
 
@@ -21,7 +24,7 @@ class ManagerSurveysController < ApplicationController
 
       study_id = params.permit(:study_id)['study_id'].to_i
       study = Study.find study_id
-      
+
       @manager_survey = ManagerSurvey.new survey_params
       @manager_survey.study = study
       # @manager_survey.mc_questions.map {|mc| mc.update_attributes(manager_survey_id: @manager_survey)}
