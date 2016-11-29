@@ -1,6 +1,7 @@
-<h1>new campaign</h1>
+<h1>Manager Form</h1>
 
-<%= simple_form_for (@manager_survey), :url => new_study_manager_survey_path do |f|%>
+<% @study = params['study_id'].to_i %>
+<%= simple_form_for (@manager_survey), :url => study_manager_surveys_path(@study) do |f|%>
   <div class="form-group">
     <%= f.label :form_name %>
     <%= f.text_field :form_name, class: "form-control" %>
