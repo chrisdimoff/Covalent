@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129015958) do
+ActiveRecord::Schema.define(version: 20161129160750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(version: 20161129015958) do
   create_table "employees", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "manager_id"
+    t.integer  "study_id"
+    t.json     "entry",       default: []
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["employee_id"], name: "index_entries_on_employee_id", using: :btree
+    t.index ["manager_id"], name: "index_entries_on_manager_id", using: :btree
+    t.index ["study_id"], name: "index_entries_on_study_id", using: :btree
   end
 
   create_table "leadings", force: :cascade do |t|
@@ -111,6 +123,9 @@ ActiveRecord::Schema.define(version: 20161129015958) do
 
   add_foreign_key "employee_participations", "studies"
   add_foreign_key "employee_participations", "users", column: "employee_id"
+  add_foreign_key "entries", "studies"
+  add_foreign_key "entries", "users", column: "employee_id"
+  add_foreign_key "entries", "users", column: "manager_id"
   add_foreign_key "leadings", "users", column: "employee_id"
   add_foreign_key "leadings", "users", column: "manager_id"
   add_foreign_key "manager_participations", "studies"
