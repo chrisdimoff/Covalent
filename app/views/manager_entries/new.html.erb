@@ -36,12 +36,15 @@
             </div>
             <div class="panel-body">
               <%= question.body %>
+              <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
               <div class="checklist-options">
 
-                <% question.options.each do |option| %>
+                <% question.options.each_with_index do |option, index| %>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" value="">
+                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt_#{index + 1}]" %>
+
+                    value="<%= option.content %>">
                     <%= option.content %>
                   </label>
                 </div>
@@ -51,6 +54,6 @@
           </div>
         <% end %>
       <% end %>
-    <%= submit_tag %>
+    <%= submit_tag "Submit Entry", class: "btn btn-default"%>
   </div>
 </div>

@@ -26,10 +26,5 @@ class ManagerEntriesController < ApplicationController
     end
   end
 
-  def index
-    @entries = Entry.all
-    respond_to do |format|
-      format.js {render @entries.to_json}
-    end
-  end
+
 end
