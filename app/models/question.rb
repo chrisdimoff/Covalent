@@ -29,4 +29,10 @@ class Question < ApplicationRecord
     end
   end
 
+  def headings
+    string = self.matrix_headings
+
+    return string.split(',').map(&:strip)
+  end
+
 end

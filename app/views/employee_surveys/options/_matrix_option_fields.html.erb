@@ -1,14 +1,12 @@
-
-
-  <tr class="matrix-option">
-    <td><input type="radio"/></td>
-    <td><input type="radio"/></td>
-    <td><input type="radio"/></td>
-    <td><input type="radio"/></td>
-    <td><input type="radio"/></td>
-    <td><input type="radio"/></td>
-    <td>
-      <%= link_to_remove_association "Remove", f, wrapper_class: 'matrix-option' %>
-  
-    </td>
-  </tr>
+<div class="matrix-option">
+  <div class="form-group">
+    <%= f.text_field :content, class: "form-control", placeholder: "Matrix Option Text Here" %>
+    <%= f.text_field :num_of_selections, value: 5, class: "hidden" %>
+      <label class="radio-inline"> <input name="x" type="radio" >1</label>
+      <label class="radio-inline"> <input name="x"  type="radio" >2</label>
+      <label class="radio-inline"> <input name="x" type="radio" >3</label>
+      <label class="radio-inline"> <input name="x" type="radio" > 4</label>
+      <label class="radio-inline"> <input name="x" type="radio" > 5</label>
+    <%= link_to_remove_association "Remove", f, wrapper_class: 'matrix-option', class: 'btn btn-default' %>
+  </div>
+</div>

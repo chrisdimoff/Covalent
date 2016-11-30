@@ -14,7 +14,8 @@ class EmployeeSurveysController < ApplicationController
                                       [:body,
                                        :kind,
                                        :employee_survey_id,
-                                       {options_attributes: [:content, :id, :_destroy]}
+                                       :matrix_headings,
+                                       {options_attributes: [:content, :id, :num_of_selections, :_destroy]}
 
                                        ] }])
 

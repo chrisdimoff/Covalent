@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
+  <div class="col-sm-10 col-sm-offset-1">
     <h1><%= @manager_survey.form_name %></h1>
       <% @manager_survey.questions.each_with_index do |question, index| %>
         <% if question.mc? %>
@@ -22,6 +22,39 @@
           </div>
         </div>
         <% elsif question.matrix? %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%=index + 1 %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                    <th> --------------------------  </th>
+                  <% question.headings.each do |heading| %>
+                    <th><%= heading %></th>
+                  <% end %>
+                </tr>
+              </thead>
+              <div class="matrix-option">
+
+                <% question.options.each_with_index do |option, index| %>
+                <tr>
+                  <td><%= option.content %></td>
+                  <% i = 1 %>
+                  <% option.num_of_selections.times do  %>
+                  <td><label class="radio-inline"> <input name=<%= "#{index}"  %> type="radio" ><%= i %></label></td>
+                    <% i = i + 1  %>
+                    <% end %>
+
+                </tr>
+              </div>
+              <% end %>
+            </table>
+            </div>
+          </div>
+        </div>
         <% elsif question.checklist? %>
           <div class="panel panel-default">
             <div class="panel-heading">
