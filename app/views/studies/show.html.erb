@@ -108,8 +108,8 @@
             <div class="btn-group-vertical" style="width: 100%;">
               <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default", method: :get %>
-              <% if @study.employee_survey.present? %>
-                <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_survey), class: "btn btn-default", method: :get %>
+              <% if @study.employee_surveys.present? %>
+                <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_surveys.last), class: "btn btn-default", method: :get %>
               <% else %>
                 <%= link_to "View Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>

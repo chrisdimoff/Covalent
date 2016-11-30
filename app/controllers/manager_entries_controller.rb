@@ -4,7 +4,7 @@ class ManagerEntriesController < ApplicationController
 
     @entry = Entry.new()
 
-    @survey = @manager.study.manager_survey
+    @survey = @manager.study.manager_surveys.last
   end
 
   def create
