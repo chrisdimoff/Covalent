@@ -28,10 +28,10 @@
           </div>
           <div class="panel-body">
             <%= question.body %>
-            <table class="table table-condensed">
+            <table class="table table-condensed" id="matrix-table">
               <thead>
                 <tr>
-                    <th> --------------------------  </th>
+                    <th style="width: 30%"> </th>
                   <% question.headings.each do |heading| %>
                     <th><%= heading %></th>
                   <% end %>
@@ -41,7 +41,7 @@
 
                 <% question.options.each_with_index do |option, index| %>
                 <tr>
-                  <td><%= option.content %></td>
+                  <td style="width: 30%"><%= option.content %></td>
                   <% i = 1 %>
                   <% option.num_of_selections.times do  %>
                   <td><label class="radio-inline"> <input name=<%= "#{index}"  %> type="radio" ><%= i %></label></td>
