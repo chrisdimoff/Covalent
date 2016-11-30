@@ -5,7 +5,7 @@
 
       @entry = Entry.new()
 
-      @survey = @employee.study.employee_survey
+      @survey = @employee.study.employee_surveys.last
     end
 
     def create

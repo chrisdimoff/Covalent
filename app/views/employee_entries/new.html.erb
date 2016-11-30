@@ -18,7 +18,7 @@
               <% question.options.each do |option| %>
               <div class="radio">
                 <label>
-                  <%= radio_button_tag "data[q#{q_num}][response]",  "#{option.content}" %>
+                  <%= radio_button_tag "data[q#{q_num}][response][opt_#{index + 1}]",  "#{option.content}" %>
 
                    <%= option.content  %>
                  </label>
@@ -30,6 +30,54 @@
           </div>
         </div>
         <% elsif question.matrix? %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%=index + 1 %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+
+            <table class="table table-condensed" id="matrix-table">
+              <thead>
+                <tr>
+                    <th class="first-heading"> </th>
+                  <% question.headings.each do |heading| %>
+                    <th><%= heading %></th>
+                  <% end %>
+                </tr>
+              </thead>
+
+
+                <% question.options.each_with_index do |option, index| %>
+                <tr>
+                  <td><%= option.content %></td>
+                  <% i = 1 %>
+                  <% option.num_of_selections.times do  %>
+                  <td>
+                    <label class="radio-inline">
+                      <input
+                        name=<%= "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                        value=<%= i %>
+                          type="radio" >
+                        <%= i %>
+                    </label>
+                  </td>
+                    <% i = i + 1  %>
+                  <% end %>
+
+                </tr>
+
+              <% end %>
+            </table>
+            </div>
+          </div>
+
+
+
+
+
+
         <% elsif question.checklist? %>
           <div class="panel panel-default">
             <div class="panel-heading">
