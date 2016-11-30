@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  
+
   has_secure_password
 
   serialize :oauth_raw_data, Hash
@@ -40,6 +40,17 @@ class User < ApplicationRecord
     def full_name
       "#{first_name} #{last_name}".strip.squeeze(' ').titleize
     end
+
+    def researcher?
+      self.type.downcase == "researcher" ? true : false
+    end
+    def manager?
+      self.type.downcase == "manager" ? true : false
+    end
+    def employee?
+      self.type.downcase == "employee" ? true : false
+    end
+
     private
 
     def downcase_email
@@ -49,5 +60,6 @@ class User < ApplicationRecord
     def from_oath?
       provider.present? && uid.present?
     end
+
 
 end

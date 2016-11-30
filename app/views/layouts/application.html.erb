@@ -28,7 +28,18 @@
 
         <% if user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Hello, <%= current_user.full_name %></a></li>
+
+            <% if current_user.employee? %>
+              <li><a href="#">Hello, <%= current_user.full_name %></a></li>
+              <li><%= link_to "Take Survey", new_employee_employee_entry_path(current_user) %></li>
+            <% elsif current_user.manager? %>
+              <li><a href="#">Hello, <%= current_user.full_name %></a></li>
+              <li><%= link_to "Take Survey", new_manager_manager_entry_path(current_user) %></li>
+            <% elsif current_user.researcher? %>
+              <li><a href="#">Hello, <%= current_user.full_name %></a></li>
+              <li><%= link_to "Researcher Dashboard", studies_path %></li>
+            <% end %>
+
             <li><%= link_to "Sign Out", new_session_path, method: :delete %></li>
 
           </ul>
@@ -36,7 +47,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Sign In", new_session_path %></li>
             <li><%= link_to "Sign Up", new_researcher_path %></li>
-          
+
 
           </ul>
         <% end %>
