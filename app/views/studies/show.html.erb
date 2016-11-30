@@ -95,8 +95,8 @@
 
               <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default", method: :get %>
-              <% if @study.manager_survey.present? %>
-                <%= link_to "View Manager Form", study_manager_survey_path(@study, @study.manager_survey), class: "btn btn-default", method: :get %>
+              <% if @study.manager_surveys.present? %>
+                <%= link_to "View Manager Form", study_manager_survey_path(@study, @study.manager_surveys.last), class: "btn btn-default", method: :get %>
               <% else %>
                 <%= link_to "View Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>
