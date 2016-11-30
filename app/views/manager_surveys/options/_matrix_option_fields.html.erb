@@ -1,6 +1,7 @@
 <div class="matrix-option">
   <div class="form-group">
-    <input type="text" class="form-control"  placeholder="Matrix Option Text Here">
+    <%= f.text_field :content, class: "form-control", placeholder: "Matrix Option Text Here" %>
+    <%= f.text_field :num_of_selections, value: 5, class: "hidden" %>
       <label class="radio-inline"> <input name="x" type="radio" >1</label>
       <label class="radio-inline"> <input name="x"  type="radio" >2</label>
       <label class="radio-inline"> <input name="x" type="radio" >3</label>

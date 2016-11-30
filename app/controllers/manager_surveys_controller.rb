@@ -15,7 +15,7 @@ class ManagerSurveysController < ApplicationController
                                        :kind,
                                        :manager_survey_id,
                                        :matrix_headings,
-                                       {options_attributes: [:content, :id, :_destroy]}
+                                       {options_attributes: [:content, :id, :num_of_selections, :_destroy]}
 
                                        ] }])
 
