@@ -34,15 +34,17 @@
     display: inline;
     width: 60%;
   }
-
 }
 
-#matrix-table{
-    table-layout: fixed;
-    td:first-child {
-      width: 30%;
-    }
-    td:last-child {
-      width: 70%;
-    }
+#matrix-table {
+  table-layout: fixed;
+
+  .first-heading {
+
+    width: 40%;
+  }
+
+
+
+
 }

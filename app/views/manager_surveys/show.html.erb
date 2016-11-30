@@ -31,17 +31,17 @@
             <table class="table table-condensed" id="matrix-table">
               <thead>
                 <tr>
-                    <th style="width: 30%"> </th>
+                    <th class="first-heading"> </th>
                   <% question.headings.each do |heading| %>
                     <th><%= heading %></th>
                   <% end %>
                 </tr>
               </thead>
-              <div class="matrix-option">
+
 
                 <% question.options.each_with_index do |option, index| %>
                 <tr>
-                  <td style="width: 30%"><%= option.content %></td>
+                  <td><%= option.content %></td>
                   <% i = 1 %>
                   <% option.num_of_selections.times do  %>
                   <td><label class="radio-inline"> <input name=<%= "#{index}"  %> type="radio" ><%= i %></label></td>
@@ -49,12 +49,12 @@
                     <% end %>
 
                 </tr>
-              </div>
+
               <% end %>
             </table>
             </div>
           </div>
-        </div>
+
         <% elsif question.checklist? %>
           <div class="panel panel-default">
             <div class="panel-heading">
