@@ -35,7 +35,7 @@
             <% elsif current_user.manager? %>
               <li><a href="#">Hello, <%= current_user.full_name %></a></li>
               <li><%= link_to "Take Survey", new_manager_manager_entry_path(current_user) %></li>
-            <% elsif current_user.researcher? %>
+            <% elsif current_guser.researcher? %>
               <li><a href="#">Hello, <%= current_user.full_name %></a></li>
               <li><%= link_to "Researcher Dashboard", studies_path %></li>
             <% end %>
