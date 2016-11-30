@@ -7,11 +7,12 @@
     <div class="panel-body">
 
       <%#= f.label "MC Question Body" %>
-      <%= f.text_field :kind, value: "mc", class: "hidden"%>
-      <%= f.text_field :body, class: "form-control", placeholder: "Multiple Choice Question Body Here" %>
+      <%= f.text_field :kind, value: "matrix", class: "hidden"%>
+      <%= f.text_field :body, class: "form-control", placeholder: "Matrix Question Body Here" %>
+      <%= f.text_field :matrix_headings, class: "form-control", placeholder: " Matrix Headers Seperated By Commas Here (e.g Very Dissatisfied, Dissatisfied, Netural, Satisfied, Very Satisfied )" %>
 
       <br />
-      <%= link_to_add_association'+ Row', f, :options, partial: 'manager_surveys/options/matrix_option_fields', 'data-association-insertion-method' => 'append'
+      <%= link_to_add_association'+ Row', f, :options, partial: 'manager_surveys/options/matrix_option_fields', 'data-association-insertion-method' => 'append', class: "btn btn-default"
       %>
 
 
