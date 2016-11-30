@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'links/employee' => 'links#employee', as: :employee_link
 
+  get 'managers/:id/download' => 'managers#download', as: :manager_download
+
   resources :studies do
     resources :manager_surveys
     resources :employee_surveys, only: [:show, :new, :create, :destroy]

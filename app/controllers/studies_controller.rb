@@ -10,6 +10,8 @@ class StudiesController < ApplicationController
 
   def show
 
+    @manager = Manager.last
+
   end
 
   def create

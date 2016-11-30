@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Manager") do |sheet|
+
+  headings = []
+  @entry.content['data'].each do |q_num , content_obj|
+    headings.push(q_num)
+  end
+
+
+  sheet.add_row headings
+
+end
