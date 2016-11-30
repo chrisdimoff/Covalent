@@ -1,19 +1,19 @@
-class ManagerSurveysController < ApplicationController
+class EmployeeSurveysController < ApplicationController
+
   def new
     @study = Study.find(params[:study_id])
-    @manager_survey = ManagerSurvey.new()
-
+    @employee_survey = EmployeeSurvey.new()
   end
 
   def create
-    survey_params = params.require(:manager_survey)
+    survey_params = params.require(:employee_survey)
         .permit([ :form_name,
                   :id,
                   :_destroy,
                   { questions_attributes:
                                       [:body,
                                        :kind,
-                                       :manager_survey_id,
+                                       :employee_survey_id,
                                        {options_attributes: [:content, :id, :_destroy]}
 
                                        ] }])
@@ -22,20 +22,15 @@ class ManagerSurveysController < ApplicationController
       study_id = params.permit(:study_id)['study_id'].to_i
       study = Study.find study_id
 
-      @manager_survey = ManagerSurvey.new survey_params
-      @manager_survey.study = study
-      # @manager_survey.mc_questions.map {|mc| mc.update_attributes(manager_survey_id: @manager_survey)}
+      @employee_survey = EmployeeSurvey.new survey_params
+      @employee_survey.study = study
+      # @employee_survey.mc_questions.map {|mc| mc.update_attributes(employee_survey_id: @employee_survey)}
 
-      if @manager_survey.save
+      if @employee_survey.save
         redirect_to study_path(params[:study_id]), notice: "Survey created"
       else
-        puts @manager_survey.errors.full_messages
+        puts @employee_survey.errors.full_messages
         render :new
       end
-  end
-
-  def show
-    @manager_survey = ManagerSurvey.find params[:id]
-
   end
 end
