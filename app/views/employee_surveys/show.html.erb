@@ -1,0 +1,49 @@
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1><%= @employee_survey.form_name %></h1>
+      <% @employee_survey.questions.each_with_index do |question, index| %>
+        <% if question.mc? %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%=index + 1 %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <div class="mc-options">
+
+              <% question.options.each do |option| %>
+              <div class="radio">
+                <label> <%= radio_button_tag 'rad', 'rad' %> <%= option.content  %> </label>
+
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% elsif question.matrix? %>
+        <% elsif question.checklist? %>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Question <%=index + 1 %></h3>
+            </div>
+            <div class="panel-body">
+              <%= question.body %>
+              <div class="checklist-options">
+
+                <% question.options.each do |option| %>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="">
+                    <%= option.content %>
+                  </label>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+  </div>
+</div>

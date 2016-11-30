@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129223813) do
+ActiveRecord::Schema.define(version: 20161130013356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,10 +91,12 @@ ActiveRecord::Schema.define(version: 20161129223813) do
   create_table "questions", force: :cascade do |t|
     t.text     "body"
     t.integer  "manager_survey_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "kind"
-    t.json     "matrix_headings",   default: []
+    t.json     "matrix_headings",    default: []
+    t.integer  "employee_survey_id"
+    t.index ["employee_survey_id"], name: "index_questions_on_employee_survey_id", using: :btree
     t.index ["manager_survey_id"], name: "index_questions_on_manager_survey_id", using: :btree
   end
 
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(version: 20161129223813) do
   add_foreign_key "manager_participations", "users", column: "manager_id"
   add_foreign_key "manager_surveys", "studies"
   add_foreign_key "options", "questions"
+  add_foreign_key "questions", "employee_surveys"
   add_foreign_key "questions", "manager_surveys"
   add_foreign_key "studies", "users", column: "researcher_id"
 end

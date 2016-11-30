@@ -33,4 +33,8 @@ class EmployeeSurveysController < ApplicationController
         render :new
       end
   end
+
+  def show
+    @employee_survey = EmployeeSurvey.find params[:id]
+  end
 end
