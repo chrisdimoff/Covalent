@@ -14,9 +14,11 @@ class ManagerEntriesController < ApplicationController
 
     end
 
+    @survey =@manager.study.manager_surveys.last
+
     @study = @manager.study
 
-    @entry = Entry.new(content: entry_params, study: @study, manager: @manager)
+    @entry = Entry.new(content: entry_params, study: @study, manager: @manager, manager_survey: @survey)
 
     if @entry.save
       redirect_to new_manager_manager_entry_path(@manager), notice: "Survey Response Received!"

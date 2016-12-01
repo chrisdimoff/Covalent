@@ -3,7 +3,7 @@
 
 wb = xlsx_package.workbook
 
-wb.add_worksheet(name: "Manager") do |sheet|
+wb.add_worksheet(name: "#{@manager.full_name}") do |sheet|
 
   headings = ["first_name", "last_name", "e-mail", "role"]
   response_row = [@manager.first_name, @manager.last_name, @manager.email, @manager.type]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130030504) do
+ActiveRecord::Schema.define(version: 20161201221229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,11 +41,15 @@ ActiveRecord::Schema.define(version: 20161130030504) do
     t.integer  "employee_id"
     t.integer  "manager_id"
     t.integer  "study_id"
-    t.json     "content",     default: []
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.json     "content",            default: []
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "employee_survey_id"
+    t.integer  "manager_survey_id"
     t.index ["employee_id"], name: "index_entries_on_employee_id", using: :btree
+    t.index ["employee_survey_id"], name: "index_entries_on_employee_survey_id", using: :btree
     t.index ["manager_id"], name: "index_entries_on_manager_id", using: :btree
+    t.index ["manager_survey_id"], name: "index_entries_on_manager_survey_id", using: :btree
     t.index ["study_id"], name: "index_entries_on_study_id", using: :btree
   end
 
@@ -136,6 +140,8 @@ ActiveRecord::Schema.define(version: 20161130030504) do
   add_foreign_key "employee_participations", "studies"
   add_foreign_key "employee_participations", "users", column: "employee_id"
   add_foreign_key "employee_surveys", "studies"
+  add_foreign_key "entries", "employee_surveys"
+  add_foreign_key "entries", "manager_surveys"
   add_foreign_key "entries", "studies"
   add_foreign_key "entries", "users", column: "employee_id"
   add_foreign_key "entries", "users", column: "manager_id"

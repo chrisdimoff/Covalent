@@ -15,8 +15,9 @@
       end
 
       @study = @employee.study
+      @survey =@employee.study.employee_surveys.last
 
-      @entry = Entry.new(content: entry_params, study: @study, employee: @employee)
+      @entry = Entry.new(content: entry_params, study: @study, employee: @employee, employee_survey: @survey)
 
       if @entry.save
         redirect_to new_employee_employee_entry_path(@employee), notice: "Survey Response Received!"
