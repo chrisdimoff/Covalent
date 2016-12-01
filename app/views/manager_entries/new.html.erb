@@ -15,9 +15,11 @@
             <%= question.body %>
             <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
             <div class="mc-options">
-              <% question.options.each do |option| %>
+              <% question.options.each_with_index do |option, index| %>
               <div class="radio">
                 <label>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                  value= 0 >
                   <%= radio_button_tag "data[q#{q_num}][response][opt_#{index + 1}]",  "#{option.content}" %>
 
                    <%= option.content  %>
