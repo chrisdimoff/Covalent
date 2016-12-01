@@ -91,6 +91,9 @@
                 <% question.options.each_with_index do |option, index| %>
                 <div class="checkbox">
                   <label>
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                    value= 0 >
+
                     <input type="checkbox" name=<%= "data[q#{q_num}][response][opt_#{index + 1}]" %>
 
                     value="<%= option.content %>">
