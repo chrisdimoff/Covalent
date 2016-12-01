@@ -37,11 +37,13 @@ class ManagersController < ApplicationController
   end
 
   def download
+
     @entry = Entry.find_by_manager_id( @manager.id )
+    @entry_number = @manager.entries.count
 
     respond_to do |format|
     format.html # don't forget if you pass html
-    format.xlsx 
+    format.xlsx
 
     end
   end

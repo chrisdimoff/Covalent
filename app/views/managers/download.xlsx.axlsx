@@ -1,13 +1,29 @@
+
+
+
 wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "Manager") do |sheet|
 
-  headings = []
+  headings = ["first_name", "last_name", "e-mail", "role"]
+  response_row = [@manager.first_name, @manager.last_name, @manager.email, @manager.type]
+
   @entry.content['data'].each do |q_num , content_obj|
-    headings.push(q_num)
+
+    question_headings = []
+    content_obj['response'].each do |opt_num, value|
+
+      response_row.push(value)
+
+      q_with_option = "#{q_num}_#{opt_num}"
+      q_with_option_and_entry_number = "#{q_with_option}_#{@entry_number}"
+      question_headings.push(q_with_option_and_entry_number)
+    end
+
+    headings.push(question_headings).flatten!
   end
 
-
   sheet.add_row headings
+  sheet.add_row response_row
 
 end
