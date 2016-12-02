@@ -13,15 +13,18 @@ class ManagerEntriesController < ApplicationController
         whitelisted['data'] = params['data']
     end
 
+
     @survey = @manager.study.manager_surveys.last
 
     @study = @manager.study
 
     @entry = Entry.new(content: entry_params, study: @study, manager: @manager, manager_survey: @survey)
     @entry.content['form_name'] = @survey.form_name
-    @entry.target_person = User.find 23
 
-
+    if params[:target_person_id]
+      target_person = User.find params[:target_person_id]
+      @entry.target_person = target_person
+    end
 
     if @entry.save
       redirect_to new_manager_manager_entry_path(@manager), notice: "Survey Response Received!"

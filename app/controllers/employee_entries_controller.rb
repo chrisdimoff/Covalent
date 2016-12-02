@@ -14,10 +14,18 @@
           whitelisted['data'] = params['data']
       end
 
+
       @study = @employee.study
       @survey =@employee.study.employee_surveys.last
 
       @entry = Entry.new(content: entry_params, study: @study, employee: @employee, employee_survey: @survey)
+      @entry.content['form_name'] = @survey.form_name
+
+
+      if params[:target_person_id]
+        target_person = User.find params[:target_person_id]
+        @entry.target_person = target_person
+      end
 
       if @entry.save
         redirect_to new_employee_employee_entry_path(@employee), notice: "Survey Response Received!"
