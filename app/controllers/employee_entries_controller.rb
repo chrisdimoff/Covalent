@@ -3,7 +3,7 @@
     def new
       @employee = Employee.find params[:employee_id]
 
-      @entry = Entry.new()
+      # @entry = Entry.new()
 
       @survey = @employee.study.employee_surveys.last
     end

@@ -28,18 +28,6 @@
               <% end %>
             </div>
 
-<script>
-// This script allows the radio buttons to have
-//  different names (as per passing a hash). It simulates the regular radio
-// by allowing only 1 per group to be clicked.
-$('.mc-options input[type="radio"]').on('change', function(){
-  $(this).parents('.mc-options').find('input[type="radio"]').each(function(){
-    $(this).prop('checked', false);
-  });
-
-  $(this).prop('checked', true);
-})
-</script>
 
           </div>
         </div>

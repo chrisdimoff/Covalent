@@ -2,8 +2,6 @@ class ManagerEntriesController < ApplicationController
   def new
     @manager = Manager.find params[:manager_id]
 
-    @entry = Entry.new()
-
     @survey = @manager.study.manager_surveys.last
   end
 
@@ -14,9 +12,9 @@ class ManagerEntriesController < ApplicationController
     end
 
 
-    @survey = @manager.study.manager_surveys.last
-
     @study = @manager.study
+    @survey = @study.manager_surveys.last
+
 
     @entry = Entry.new(content: entry_params, study: @study, manager: @manager, manager_survey: @survey)
     @entry.content['form_name'] = @survey.form_name
