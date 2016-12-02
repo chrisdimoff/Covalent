@@ -19,11 +19,14 @@ class ManagerEntriesController < ApplicationController
 
     @entry = Entry.new(content: entry_params, study: @study, manager: @manager, manager_survey: @survey)
     @entry.content['form_name'] = @survey.form_name
+    @entry.target_person = User.find 23
+
 
 
     if @entry.save
       redirect_to new_manager_manager_entry_path(@manager), notice: "Survey Response Received!"
     else
+      puts @entry.errors.full_messages
       render :new
     end
   end
