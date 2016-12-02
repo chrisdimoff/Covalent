@@ -1,6 +1,17 @@
 
 <div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
+  <div class="col-sm-2"> <!-- required for floating -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tabs-left" style="height: 100vh;">
+      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+      <li><a href="#messages" data-toggle="tab">Messages</a></li>
+      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    </ul>
+</div>
+
+
+  <div class="col-sm-10 ">
     <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
     <% @manager.employees.each do |employee| %>
     <h3>Reviewing: <%= employee.full_name %> </h3>
@@ -128,4 +139,6 @@ $('.mc-options input[type="radio"]').on('change', function(){
     <% end %>
     <button> MASTER SUBMIT!</button>
   </div>
+
+
 </div>

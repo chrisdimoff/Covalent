@@ -2,10 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.sidebar-wrapper {
+.sidebar-wrapper-right-padding {
 
   height: 100vh;
   position: fixed;
   right: 0;
 
+}
+
+.navbar {
+  margin-bottom: 0
+}
+
+.main {
+  margin-top: 20px;
+}
+
+.sidebar-wrapper-right-full {
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color: grey;
+  z-index: -1
 }
