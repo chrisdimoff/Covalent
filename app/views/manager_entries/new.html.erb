@@ -3,10 +3,10 @@
   <div class="col-sm-2 " > <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs tabs-left" style="height: 100vh">
-      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-      <li><a href="#profile" data-toggle="tab">Profile</a></li>
-      <li><a href="#24" data-toggle="tab">Messages</a></li>
-      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+      <% @manager.employees.each_with_index do |emp, index| %>
+      <li class="<%=  index == 0 ? 'active' : ''  %>"><a href= #<%= emp.id %> data-toggle="tab"><%= emp.full_name %></a></li>
+
+      <% end %>
     </ul>
 </div>
 
