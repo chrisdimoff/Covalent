@@ -1,24 +1,26 @@
 
-<div class="row">
-  <div class="col-sm-2"> <!-- required for floating -->
+<div class="row row-eq-height">
+  <div class="col-sm-2 " > <!-- required for floating -->
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs tabs-left" style="height: 100vh;">
+    <ul class="nav nav-tabs tabs-left" style="height: 100vh">
       <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
       <li><a href="#profile" data-toggle="tab">Profile</a></li>
-      <li><a href="#messages" data-toggle="tab">Messages</a></li>
+      <li><a href="#24" data-toggle="tab">Messages</a></li>
       <li><a href="#settings" data-toggle="tab">Settings</a></li>
     </ul>
 </div>
 
-
   <div class="col-sm-10 ">
-    <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
-    <% @manager.employees.each do |employee| %>
-    <h3>Reviewing: <%= employee.full_name %> </h3>
-    <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post do %>
-      <input type="hidden" name="target_person_id" value = <%= employee.id %>>
+    <div class="tab-content">
 
-      <% @survey.questions.each_with_index do |question, index| %>
+      <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
+      <% @manager.employees.each_with_index do |employee, index| %>
+      <div id= <%= employee.id %> class="tab-pane <%=  index == 0 ? 'active' : ''  %> ">
+        <h3>Reviewing: <%= employee.full_name %> </h3>
+        <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post do %>
+        <input type="hidden" name="target_person_id" value = <%= employee.id %>>
+
+        <% @survey.questions.each_with_index do |question, index| %>
         <% q_num = index + 1 %>
         <% if question.mc? %>
         <div class="panel panel-default">
@@ -36,24 +38,24 @@
                   value= 0 >
                   <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}]",  "#{option.content}" %>
 
-                   <%= option.content  %>
-                 </label>
+                  <%= option.content  %>
+                </label>
               </div>
               <% end %>
             </div>
 
-<script>
-// This script allows the radio buttons to have
-//  different names (as per passing a hash). It simulates the regular radio
-// by allowing only 1 per group to be clicked.
-$('.mc-options input[type="radio"]').on('change', function(){
-  $(this).parents('.mc-options').find('input[type="radio"]').each(function(){
-    $(this).prop('checked', false);
-  });
+            <script>
+            // This script allows the radio buttons to have
+            //  different names (as per passing a hash). It simulates the regular radio
+            // by allowing only 1 per group to be clicked.
+            $('.mc-options input[type="radio"]').on('change', function(){
+              $(this).parents('.mc-options').find('input[type="radio"]').each(function(){
+                $(this).prop('checked', false);
+              });
 
-  $(this).prop('checked', true);
-})
-</script>
+              $(this).prop('checked', true);
+            })
+            </script>
 
           </div>
         </div>
@@ -69,37 +71,37 @@ $('.mc-options input[type="radio"]').on('change', function(){
             <table class="table table-condensed" id="matrix-table">
               <thead>
                 <tr>
-                    <th class="first-heading"> </th>
+                  <th class="first-heading"> </th>
                   <% question.headings.each do |heading| %>
-                    <th><%= heading %></th>
+                  <th><%= heading %></th>
                   <% end %>
                 </tr>
               </thead>
 
 
-                <% question.options.each_with_index do |option, index| %>
-                <tr>
-                  <td><%= option.content %></td>
-                  <% i = 1 %>
-                  <% option.num_of_selections.times do  %>
-                  <td>
-                    <label class="radio-inline">
-                      <input
-                        name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
-                        value=<%= i %>
-                          type="radio" >
-                        <%= i %>
-                    </label>
-                  </td>
-                    <% i = i + 1  %>
-                  <% end %>
+              <% question.options.each_with_index do |option, index| %>
+              <tr>
+                <td><%= option.content %></td>
+                <% i = 1 %>
+                <% option.num_of_selections.times do  %>
+                <td>
+                  <label class="radio-inline">
+                    <input
+                    name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
+                    value=<%= i %>
+                    type="radio" >
+                    <%= i %>
+                  </label>
+                </td>
+                <% i = i + 1  %>
+                <% end %>
 
-                </tr>
+              </tr>
 
               <% end %>
             </table>
-            </div>
           </div>
+        </div>
 
 
 
@@ -107,38 +109,42 @@ $('.mc-options input[type="radio"]').on('change', function(){
 
 
         <% elsif question.checklist? %>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Question <%=index + 1 %></h3>
-            </div>
-            <div class="panel-body">
-              <%= question.body %>
-              <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
-              <div class="checklist-options">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%=index + 1 %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+            <div class="checklist-options">
 
-                <% question.options.each_with_index do |option, index| %>
-                <div class="checkbox">
-                  <label>
-                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}]" %>
-                    value= 0 >
+              <% question.options.each_with_index do |option, index| %>
+              <div class="checkbox">
+                <label>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}]" %>
+                  value= 0 >
 
-                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
+                  <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
 
-                    value="<%= option.content %>">
-                    <%= option.content %>
-                  </label>
-                </div>
-                <% end %>
+                  value="<%= option.content %>">
+                  <%= option.content %>
+                </label>
               </div>
+              <% end %>
             </div>
           </div>
+        </div>
         <% end %>
+
+        <% end %>
+        <%= submit_tag "Submit Entry", class: "btn btn-default"%>
+      </div>
       <% end %>
-    <%= submit_tag "Submit Entry", class: "btn btn-default"%>
-    <% end %>
-    <% end %>
-    <button> MASTER SUBMIT!</button>
-  </div>
+
+      <% end %>
+      <button> MASTER SUBMIT!</button>
+    </div>
+    </div>
 
 
 </div>
