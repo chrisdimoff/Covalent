@@ -3,7 +3,7 @@ wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "#{@participant.full_name}") do |sheet|
 
-  headings = ["first_name", "last_name", "e-mail", "role"]
+  headings = ["First Name", "Last Name", "E-Mail", "Role"]
   response_row = [@participant.first_name, @participant.last_name, @participant.email, @participant.type]
 
   @entries.each_with_index do |entry, index|
