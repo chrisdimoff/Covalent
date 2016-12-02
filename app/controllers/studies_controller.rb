@@ -9,8 +9,11 @@ class StudiesController < ApplicationController
   end
 
   def show
-
     @manager = Manager.last
+
+    @managers_signed_up = @study.managers.count
+    @employees_signed_up = @study.employees.count
+    @managers_not_signed_up = @study.num_of_managers - @managers_signed_up
 
   end
 

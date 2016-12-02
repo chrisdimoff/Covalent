@@ -4,6 +4,12 @@
 <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>
 
+<div class="row">
+  <div class="col-sm-4">
+    <%= pie_chart [["Managers Signed Up", @managers_signed_up], ["Not Signed Up", @managers_not_signed_up]], colors: ["#5CB85C", "#D9534F"] %>
+  </div>
+</div>
+
 
 <div class ="row">
   <div class="col-sm-8">
