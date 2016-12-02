@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'links/employee' => 'links#employee', as: :employee_link
 
-  get 'managers/:id/download' => 'downloads#ind_manager', as: :ind_manager_download
+  get 'users/:id/download' => 'downloads#ind_participant', as: :ind_participant_download
 
   resources :studies do
     resources :manager_surveys

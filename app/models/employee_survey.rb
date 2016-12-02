@@ -6,6 +6,6 @@ class EmployeeSurvey < ApplicationRecord
 
   accepts_nested_attributes_for :questions, reject_if: :all_blank, allow_destroy: true
 
-
+  validates :form_name, presence: true
 
 end

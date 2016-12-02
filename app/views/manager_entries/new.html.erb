@@ -18,9 +18,9 @@
               <% question.options.each_with_index do |option, index| %>
               <div class="radio">
                 <label>
-                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}]" %>
                   value= 0 >
-                  <%= radio_button_tag "data[q#{q_num}][response][opt_#{index + 1}]",  "#{option.content}" %>
+                  <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}]",  "#{option.content}" %>
 
                    <%= option.content  %>
                  </label>
@@ -59,7 +59,7 @@
                   <td>
                     <label class="radio-inline">
                       <input
-                        name=<%= "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                        name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
                         value=<%= i %>
                           type="radio" >
                         <%= i %>
@@ -93,10 +93,10 @@
                 <% question.options.each_with_index do |option, index| %>
                 <div class="checkbox">
                   <label>
-                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}]" %>
                     value= 0 >
 
-                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt_#{index + 1}]" %>
+                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
 
                     value="<%= option.content %>">
                     <%= option.content %>

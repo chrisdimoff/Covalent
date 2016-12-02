@@ -2,6 +2,8 @@
 <div class="row">
   <div class="col-sm-9 ">
 
+    <%= @manager_survey.errors.full_messages.join(", ") %>
+
     <% @study = params['study_id'].to_i %>
     <%= simple_form_for (@manager_survey), :url => study_manager_surveys_path(@study) do |f|%>
     <div class="panel panel-default">

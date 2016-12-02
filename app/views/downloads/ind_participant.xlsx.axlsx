@@ -1,0 +1,32 @@
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "#{@participant.full_name}") do |sheet|
+
+  headings = ["first_name", "last_name", "e-mail", "role"]
+  response_row = [@participant.first_name, @participant.last_name, @participant.email, @participant.type]
+
+  @entries.each_with_index do |entry, index|
+    entry_number = index + 1
+
+    form_name = entry.content['form_name']
+    entry.content['data'].each do |q_num , content_obj|
+
+      question_headings = []
+      content_obj['response'].each do |opt_num, value|
+
+        response_row.push(value)
+
+        q_with_option = "#{q_num}_#{opt_num}"
+        q_option_form_name_entry_number = "#{q_with_option}_#{form_name}_ent#{entry_number}"
+        question_headings.push(q_option_form_name_entry_number)
+      end
+
+      headings.push(question_headings).flatten!
+    end
+
+
+  end
+  sheet.add_row headings
+  sheet.add_row response_row
+end

@@ -37,7 +37,7 @@
             <td> <%= mgr.last_name %>   </td>
             <td> <%= mgr.employees.count %>   </td>
             <td> <%= mgr.entries.count %>   </td>
-            <td> <%= link_to "Download", ind_manager_download_path(mgr.id, :format => :xlsx) %></td>
+            <td> <%= link_to "Download", ind_participant_download_path(mgr.id, :format => :xlsx) %></td>
           </tr>
 
           <% end %>
@@ -94,7 +94,7 @@
             <div class="btn-group-vertical" style="width: 100%;">
 
 
-              <%= link_to 'Excel Download last mgr', ind_manager_download_path(@manager, :format => :xlsx) %>
+              <%= link_to 'Excel Download last mgr', ind_participant_download_path(@manager, :format => :xlsx) %>
               <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default", method: :get %>
               <% if @study.manager_surveys.present? %>
