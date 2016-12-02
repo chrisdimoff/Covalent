@@ -2,10 +2,7 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
-    <% @manager.employees.each do |employee| %>
-    <h3>Reviewing: <%= employee.full_name %> </h3>
-    <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post do %>
-      <input type="hidden" name="target_person_id" value = <%= employee.id %>>
+    <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post %>
 
       <% @survey.questions.each_with_index do |question, index| %>
         <% q_num = index + 1 %>
@@ -124,8 +121,5 @@ $('.mc-options input[type="radio"]').on('change', function(){
         <% end %>
       <% end %>
     <%= submit_tag "Submit Entry", class: "btn btn-default"%>
-    <% end %>
-    <% end %>
-    <button> MASTER SUBMIT!</button>
   </div>
 </div>
