@@ -1,6 +1,6 @@
 
 <div class="row row-eq-height">
-  <div class="col-sm-2 " > <!-- required for floating -->
+  <div class="col-xs-2 " > <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs tabs-left" style="height: 100vh">
       <% @manager.employees.each_with_index do |emp, index| %>
@@ -10,7 +10,7 @@
     </ul>
 </div>
 
-  <div class="col-sm-10 ">
+  <div class="col-xs-10 ">
     <div class="tab-content">
 
       <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
@@ -142,9 +142,16 @@
       <% end %>
 
       <% end %>
-      <button> MASTER SUBMIT!</button>
     </div>
     </div>
 
 
 </div>
+
+<script>
+
+  // $('form').on('submit', function(){
+  //   // console.log("form disabled")
+  //   $(this).find('input').attr("disabled", true)
+  // })
+</script>

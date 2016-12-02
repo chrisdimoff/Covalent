@@ -23,3 +23,5 @@
 //= require bootstrap/dropdown
 //= require bootstrap/tab
 //= require cocoon
+//= require highcharts
+//= require chartkick
