@@ -25,7 +25,8 @@ class ManagerEntriesController < ApplicationController
     end
 
     if @entry.save
-      redirect_to new_manager_manager_entry_path(@manager), notice: "Survey Response Received!"
+      # redirect_to new_manager_manager_entry_path(@manager), notice: "Survey Response Received!"
+      # render :new
     else
       puts @entry.errors.full_messages
       render :new
