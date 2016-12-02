@@ -9,6 +9,61 @@ span.glyphicon-file {
   font-size: 3rem;
   text-align: center;
 }
+i.panel-icon {
+  display: block;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+}
+
+i.panel-close {
+
+  display: inline-block;
+  margin: 0;
+}
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.panel-yellow {
+  background-color: #F0AD4E;
+
+  a {
+    color: #F0AD4E;
+  }
+  span {
+    color: white;
+  }
+}
+.panel-red {
+  background-color: #D9534F;
+
+  a {
+    color: #D9534F;
+  }
+  span {
+    color: white;
+  }
+}
+
+.panel-footer {
+  background-color: white;
+}
+
+
+.panel-number span {
+  color: white;
+  font-size: 3rem;
+  vertical-align: top;
+}
 
 div.well {
   margin: 0;
