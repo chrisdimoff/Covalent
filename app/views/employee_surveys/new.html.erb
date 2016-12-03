@@ -14,10 +14,8 @@
       </div>
       <div class="panel-body">
 
-        <div class="form-group">
-          <%#= f.label :form_name %>
           <%= f.text_field :form_name, class: "form-control", value: "#{@study.title} -- Employee Time #{@survey_number}" %>
-        </div>
+          <label>(click to change)</label>
       </div>
     </div>
 

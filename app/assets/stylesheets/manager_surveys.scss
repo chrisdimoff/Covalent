@@ -9,6 +9,10 @@
   padding-top: 10px;
 }
 
+.upper-right-icon {
+  color: white;
+}
+
 .mc-container {
   .radio {
     padding-left: 7%;
@@ -17,6 +21,9 @@
     width: 80%;
   }
 
+  .form-builder-text-input {
+    width: 65%
+  }
 
 }
 
@@ -25,7 +32,11 @@
     padding-left: 7%;
   }
   label {
-    width: 75%;
+    width: 80%;
+  }
+
+  .form-builder-text-input {
+    width: 65%
   }
 }
 

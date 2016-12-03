@@ -1,9 +1,12 @@
 
 <div class="checkbox">
 
+
     <label>
-      <%= check_box_tag  class: "checkbox"%> <%= f.text_field :content,  class: "form-control", placeholder: "Check Option" %>
+      <%= check_box_tag class:"checkbox" %> <%= f.text_field :content, placeholder: "Check Option", class: "form-builder-text-input" %>
     </label>
+
+
 
     <%= link_to_remove_association "Remove", f, wrapper_class: 'checkbox', class: 'btn btn-default' %>
   </div>
