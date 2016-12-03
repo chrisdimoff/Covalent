@@ -17,10 +17,10 @@
       <%= f.text_field :body, class: "form-control", placeholder: "Checklist Question Body Here" %>
 
       <br />
-      <%= link_to_add_association'Add Check Item', f, :options, partial: 'employee_surveys/options/checklist_option_fields',
-      'data-association-insertion-method' => 'append', class: "btn btn-default"
+      <%= link_to_add_association'+ Check Item', f, :options, partial: 'employee_surveys/options/checklist_option_fields',
+      'data-association-insertion-method' => 'append', class: "btn btn-primary"
       %>
-      <%= link_to_remove_association("Remove Question", f, wrapper_class: 'checkbox-container', class: "btn btn-default" ) %>
+
 
       <br />
     </div>
