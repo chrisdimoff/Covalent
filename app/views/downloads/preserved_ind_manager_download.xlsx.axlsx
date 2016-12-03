@@ -1,0 +1,68 @@
+
+wb = xlsx_package.workbook
+
+@surveys.each do |survey|
+  wb.add_worksheet(name: "#{survey.form_name}") do |sheet|
+
+    # intialize first part of first row (first row)
+    headings = ["Id", "First Name", "Last Name", "E-Mail", "Role", "Emp ID", "Emp First Name", "Emp Last Name", "Emp E-mail", "Entry Date"]
+
+    #Build question headings using first entry on form(first row)
+    q_with_options = []
+
+    survey.entries.where(manager_id: @manager.id)
+    .first.content['data'].each do |q_num, data_object|
+
+      data_object['response'].each do |opt_num, response_val|
+        q_with_options.push("#{q_num}_#{opt_num}")
+
+      end
+    end
+
+    #add q_with_options to headings
+
+    headings = headings + q_with_options
+
+    # make manager info (entire second row)
+    manager_info = [@manager.id, @manager.first_name, @manager.last_name, @manager.email, @manager.type]
+
+    #initialize array to store all of the employee response rows
+    employee_rows = []
+
+
+    @manager.employees.each do |emp|
+      #initialize response row (will be recycled and used for each employee)
+      response_row = [" ", " ", " ", " ", " "]
+
+      # create employee info array (to be added to end of response row)
+      employee_info = [emp.id, emp.first_name, emp.last_name, emp.email ]
+
+      # add employee info to response row
+      response_row = response_row + employee_info
+
+      @manager.entries.where(target_person_id: emp.id, manager_survey_id: survey.id )
+      .each do |entry|
+        response_row.push(entry.created_at) # add date to response row
+        entry.content['data'].each do |q_num, question_object|
+          question_object['response'].each do |opt_num, response_value|
+            response_row.push(response_value)
+          end
+        end
+      end
+
+
+
+      # add manager responses to response row
+
+      #add response row to employee_rows array
+      employee_rows.push(response_row)
+    end
+
+    sheet.add_row(headings)
+    sheet.add_row(manager_info)
+    employee_rows.each do |emp_row|
+      sheet.add_row(emp_row)
+    end
+
+  end
+end

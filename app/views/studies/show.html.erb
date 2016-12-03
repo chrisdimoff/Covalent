@@ -1,4 +1,6 @@
-
+<head>
+  <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+</head>
 
 
 <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -7,6 +9,7 @@
 
 <div class ="row">
   <div class="col-sm-9">
+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
@@ -100,7 +103,7 @@
               <td> <%= mgr.last_name %>   </td>
               <td> <%= mgr.employees.count %>   </td>
               <td> <%= mgr.entries.count %>   </td>
-              <td> <%= link_to "Download", ind_participant_download_path(mgr.id, :format => :xlsx) %></td>
+              <td> <%= link_to "Download", ind_manager_download_path(mgr.id, :format => :xlsx) %></td>
             </tr>
 
             <% end %>
