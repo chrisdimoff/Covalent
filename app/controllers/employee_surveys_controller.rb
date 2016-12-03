@@ -3,6 +3,8 @@ class EmployeeSurveysController < ApplicationController
   def new
     @study = Study.find(params[:study_id])
     @employee_survey = EmployeeSurvey.new()
+    @survey_number = @study.employee_surveys.count + 1
+
   end
 
   def create
@@ -22,6 +24,7 @@ class EmployeeSurveysController < ApplicationController
 
       study_id = params.permit(:study_id)['study_id'].to_i
       study = Study.find study_id
+
 
       @employee_survey = EmployeeSurvey.new survey_params
       @employee_survey.study = study

@@ -14,8 +14,10 @@
     padding-left: 7%;
   }
   label {
-    width: 75%;
+    width: 80%;
   }
+
+
 }
 
 .checkbox-container {
@@ -43,5 +45,11 @@
 
     width: 40%;
   }
+}
+
+.radio-wrapper {
+  display: flex;
+  flex-direction: row;
+  background-color: pink;
 
 }

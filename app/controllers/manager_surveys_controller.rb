@@ -2,6 +2,7 @@ class ManagerSurveysController < ApplicationController
   def new
     @study = Study.find(params[:study_id])
     @manager_survey = ManagerSurvey.new()
+    @survey_number = @study.manager_surveys.count + 1
 
   end
 

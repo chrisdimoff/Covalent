@@ -16,6 +16,10 @@ i.panel-icon {
   text-align: center;
 }
 
+i.question-icon {
+  color: black;
+}
+
 i.panel-close {
 
   display: inline-block;
@@ -77,4 +81,13 @@ a .panel {
 
 .panel-body .btn-group-vertical {
   margin-bottom: 10px;
+}
+
+.panel-heading-form {
+
+  height: 55px;
+  input {
+    // height: 25px;
+
+  }
 }
