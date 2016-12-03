@@ -30,7 +30,7 @@
           <li><%= link_to "Research Dashboard", studies_path %></li>
         <% end %>
 
-        <li><%= link_to "Sign Out", new_session_path, method: :delete %></li>
+        <li><%= link_to "Sign Out", session_path(current_user), method: :delete %></li>
 
       </ul>
     <% else %>

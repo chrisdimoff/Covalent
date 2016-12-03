@@ -1,5 +1,7 @@
 class StudiesController < ApplicationController
   before_action :find_study, only: [:show]
+  before_action :authenticate_user
+  before_action :authorize_access, only: [:show, :destroy]
   def index
     @studies = current_user.studies
   end
@@ -48,17 +50,12 @@ class StudiesController < ApplicationController
     @study = Study.new study_params
     @study.status = "Pending"
 
-    if current_user.type.downcase == 'researcher'
       @study.researcher = current_user
       if @study.save
         redirect_to study_path(@study), notice: "Study Created!"
       else
         render :new, alert: "Please see errors below"
       end
-    else
-      redirect_to new_study_path, alert: "You must be a researcher to create a study!"
-    end
-
 
   end
 
@@ -74,5 +71,12 @@ class StudiesController < ApplicationController
 
   def study_params
     study_params = params.require(:study).permit(:title, :num_of_managers, :num_of_employees, :company)
+  end
+
+  def authorize_access
+    unless can? :manage, @study
+      # head :unauthorized # this will send an empty HTTP response with 401 code
+      redirect_to root_path, alert: 'access denied'
+    end
   end
 end

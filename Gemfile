@@ -13,6 +13,7 @@ gem 'cocoon'
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'chartkick'
+gem 'cancancan'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
