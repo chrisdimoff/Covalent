@@ -34,9 +34,11 @@
               <% question.options.each_with_index do |option, index| %>
               <div class="radio">
                 <label>
-                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}]" %>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
                   value= 0 >
-                  <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}]",  "#{option.content}" %>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                  value= "<%= option.content %>" >
+                  <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}][value]",  1 %>
 
                   <%= option.content  %>
                 </label>
@@ -86,8 +88,10 @@
                 <% option.num_of_selections.times do  %>
                 <td>
                   <label class="radio-inline">
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                    value= "<%= option.content %>" >
                     <input
-                    name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
+                    name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
                     value=<%= i %>
                     type="radio" >
                     <%= i %>
@@ -124,11 +128,11 @@
                   <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
                   value= 0 >
                   <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
-                  value= <%= option.content %> >
+                  value= "<%= option.content %>" >
 
                   <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
 
-                  value="1">
+                  value= 1>
                   <%= option.content %>
                 </label>
               </div>
