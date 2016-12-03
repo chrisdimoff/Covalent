@@ -7,7 +7,7 @@
       <% @survey.questions.each_with_index do |question, index| %>
         <% q_num = index + 1 %>
         <% if question.mc? %>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Question <%= q_num %></h3>
           </div>
@@ -18,10 +18,14 @@
               <% question.options.each do |option| %>
               <div class="radio">
                 <label>
-                  <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}]",  "#{option.content}" %>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                  value= 0 >
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                  value= "<%= option.content %>" >
+                  <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}][value]",  1 %>
 
-                   <%= option.content  %>
-                 </label>
+                  <%= option.content  %>
+                </label>
               </div>
               <% end %>
             </div>
@@ -30,7 +34,7 @@
           </div>
         </div>
         <% elsif question.matrix? %>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Question <%=index + 1 %></h3>
           </div>
@@ -56,11 +60,13 @@
                   <% option.num_of_selections.times do  %>
                   <td>
                     <label class="radio-inline">
+                      <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                      value= "<%= option.content %>" >
                       <input
-                        name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
-                        value=<%= i %>
-                          type="radio" >
-                        <%= i %>
+                      name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                      value=<%= i %>
+                      type="radio" >
+                      <%= i %>
                     </label>
                   </td>
                     <% i = i + 1  %>
@@ -79,7 +85,7 @@
 
 
         <% elsif question.checklist? %>
-          <div class="panel panel-default">
+          <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Question <%=index + 1 %></h3>
             </div>
@@ -91,9 +97,14 @@
                 <% question.options.each_with_index do |option, index| %>
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}]" %>
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                    value= 0 >
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                    value= "<%= option.content %>" >
 
-                    value="<%= option.content %>">
+                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                    value= 1>
+
                     <%= option.content %>
                   </label>
                 </div>

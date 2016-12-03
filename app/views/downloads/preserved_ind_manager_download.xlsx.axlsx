@@ -10,11 +10,17 @@ wb = xlsx_package.workbook
     #Build question headings using first entry on form(first row)
     q_with_options = []
 
+    option_content_headings = []
+    5.times do
+      option_content_headings.push(" ")
+    end
+
     survey.entries.where(manager_id: @manager.id)
     .first.content['data'].each do |q_num, data_object|
 
-      data_object['response'].each do |opt_num, response_val|
+      data_object['response'].each do |opt_num, option_data|
         q_with_options.push("#{q_num}_#{opt_num}")
+        option_content_headings.push(option_data['content'])
 
       end
     end
@@ -44,11 +50,12 @@ wb = xlsx_package.workbook
       .each do |entry|
         response_row.push(entry.created_at) # add date to response row
         entry.content['data'].each do |q_num, question_object|
-          question_object['response'].each do |opt_num, response_value|
-            response_row.push(response_value)
+          question_object['response'].each do |opt_num, option_data|
+            response_row.push(option_data['value'])
           end
         end
       end
+
 
 
 
@@ -59,7 +66,7 @@ wb = xlsx_package.workbook
     end
 
     sheet.add_row(headings)
-    sheet.add_row(manager_info)
+    sheet.add_row(manager_info + option_content_headings)
     employee_rows.each do |emp_row|
       sheet.add_row(emp_row)
     end
