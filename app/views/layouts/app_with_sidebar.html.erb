@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MHAPP</title>
+
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render "layouts/navbar" %>
+    <div class="container-fluid">
+      <% if notice || alert %>
+      <%# the ternary is used to set the alert type based on whether we received
+      notification or an alert %>
+      <div
+      class="alert alert-<%= notice ? 'success' : 'danger'%> alert-dismissable"
+      role="alert">
+      <%= notice || alert %>
+
+      <%# add x button to close notification element %>
+      <button
+      type="button"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+  </body>
+</html>

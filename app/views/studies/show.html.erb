@@ -6,160 +6,231 @@
 
 
 <div class ="row">
-  <div class="col-sm-8">
-    <div class="panel panel-default">
+  <div class="col-sm-9">
+    <div class="panel panel-primary">
       <div class="panel-heading">
+        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         <h3 class="panel-title">
           Managers - <%= @study.managers.count %> / <%= @study.num_of_managers %>
         </h3>
       </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-8">
-            <%= pie_chart [["Signed Up - Active", @managers_signed_up_active],["Signed Up - No Entries", @managers_signed_up_inactive], ["Not Signed Up", @managers_not_signed_up]], colors: ["#5CB85C", "yellow", "#D9534F"] %>
-          </div>
-          <div class="col-sm-4" >
+      <div class="panel-collapse-wrapper">
 
-            <div class="panel panel-yellow">
-              <!-- <i class="glyphicon glyphicon-exclamation-sign panel-close" aria-hidden="true" > </i> -->
-              <div class="panel-heading">
-                <div class="flex-row">
-                  <i class="glyphicon glyphicon-exclamation-sign panel-icon" aria-hidden="true" > </i>
-                  <div>
-                    <div class="panel-number text-right">
-                      <span><%= @managers_signed_up_inactive %></span>
-                    </div>
-                    <div class="text-right">
-                      <span>Inactive Managers</span>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-7">
+
+              <%= pie_chart [["Signed Up - Active", @managers_signed_up_active],["Signed Up - No Entries", @managers_signed_up_inactive], ["Not Signed Up", @managers_not_signed_up]], colors: ["#5CB85C", "#F0AD4E", "#D9534F"] %>
+            </div>
+            <div class="col-sm-5" >
+
+              <% if @managers_signed_up_inactive > 0 %>
+              <div class="panel panel-yellow">
+                <!-- <i class="glyphicon glyphicon-exclamation-sign panel-close" aria-hidden="true" > </i> -->
+                <div class="panel-heading">
+                  <div class="flex-row">
+                    <i class="glyphicon glyphicon-warning-sign panel-icon" aria-hidden="true" > </i>
+                    <div>
+                      <div class="panel-number text-right">
+                        <span><%= @managers_signed_up_inactive %></span>
+                      </div>
+                      <div class="text-right">
+                        <span>Inactive Managers</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="panel-footer" >
-                <div class="flex-row">
-                  <%= link_to "View Details", nil, class:"panel-link" %>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-red">
-              <!-- <i class="glyphicon glyphicon-exclamation-sign panel-close" aria-hidden="true" > </i> -->
-              <div class="panel-heading">
-                <div class="flex-row">
-                  <i class="glyphicon glyphicon-exclamation-sign panel-icon" aria-hidden="true" > </i>
-                  <div>
-                    <div class="panel-number text-right">
-                      <span><%= @managers_not_signed_up %></span>
-                    </div>
-                    <div class="text-right">
-                      <span>Managers Not Signed Up</span>
-                    </div>
+                <div class="panel-footer" >
+                  <div class="flex-row">
+                    <%= link_to "View Details", nil, class:"panel-link" %>
                   </div>
                 </div>
               </div>
-              <div class="panel-footer" >
-                <div class="flex-row">
-                  <%= link_to "View Details", nil, class:"panel-link" %>
+              <% end %>
+
+              <% if @managers_not_signed_up > 0 %>
+              <div class="panel panel-red">
+                <!-- <i class="glyphicon glyphicon-exclamation-sign panel-close" aria-hidden="true" > </i> -->
+                <div class="panel-heading">
+                  <div class="flex-row">
+                    <i class="glyphicon glyphicon-exclamation-sign panel-icon" aria-hidden="true" > </i>
+                    <div>
+                      <div class="panel-number text-right">
+                        <span><%= @managers_not_signed_up %></span>
+                      </div>
+                      <div class="text-right">
+                        <span>Managers Not Signed Up</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer" >
+                  <div class="flex-row">
+                    <%= link_to "View Details",'#' , class:"panel-link" %>
+                  </div>
                 </div>
               </div>
+              <% end %>
+
+
             </div>
-
-
-
           </div>
+
+          <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
         </div>
+        <table class="table table-striped table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th># of Employees</th>
+              <th># of Entries</th>
+              <th> Actions </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @study.managers.each do |mgr| %>
 
-        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+
+            <tr data-link= <%= manager_path(mgr.id) %>>
+              <td> <%= mgr.id %></td>
+              <td> <%= mgr.first_name %>   </td>
+              <td> <%= mgr.last_name %>   </td>
+              <td> <%= mgr.employees.count %>   </td>
+              <td> <%= mgr.entries.count %>   </td>
+              <td> <%= link_to "Download", ind_participant_download_path(mgr.id, :format => :xlsx) %></td>
+            </tr>
+
+            <% end %>
+          </tbody>
+        </table>
       </div>
-      <table class="table table-striped table-condensed">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th># of Employees</th>
-            <th># of Entries</th>
-            <th> Actions </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @study.managers.each do |mgr| %>
+      </div>
 
-
-          <tr data-link=<%= manager_path(mgr.id) %>>
-            <td> <%= mgr.id %></td>
-            <td> <%= mgr.first_name %>   </td>
-            <td> <%= mgr.last_name %>   </td>
-            <td> <%= mgr.employees.count %>   </td>
-            <td> <%= mgr.entries.count %>   </td>
-            <td> <%= link_to "Download", ind_participant_download_path(mgr.id, :format => :xlsx) %></td>
-          </tr>
-
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
       <div class="panel-heading">
+        <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
         <h3 class="panel-title">
           Employees -  <%= @study.employees.count %> / <%= @study.num_of_employees %>
         </h3>
       </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-8">
+      <div class="panel-collapse-wrapper">
+
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-7">
               <%= pie_chart [["Signed Up - Active", @employees_signed_up_active],["Signed Up - No Entries", @employees_signed_up_inactive], ["Not Signed Up", @employees_not_signed_up]], colors: ["#5CB85C", "yellow", "#D9534F"] %>
+            </div>
+            <div class="col-sm-5" >
+
+              <%  if @employees_signed_up_inactive > 0 %>
+              <div class="panel  panel-yellow">
+                <!-- <i class="glyphicon glyphicon-exclamation-sign panel-close" aria-hidden="true" > </i> -->
+                <div class="panel-heading">
+                  <div class="flex-row">
+                    <i class="glyphicon glyphicon-warning-sign panel-icon" aria-hidden="true" > </i>
+                    <div>
+                      <div class="panel-number text-right">
+                        <span><%= @employees_signed_up_inactive %></span>
+                      </div>
+                      <div class="text-right">
+                        <span>Inactive Employees</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer" >
+                  <div class="flex-row">
+                    <%= link_to "View Details", nil, class:"panel-link" %>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+
+
+              <% if @employees_not_signed_up > 0 %>
+              <div class="panel panel-red">
+                <!-- <i class="glyphicon glyphicon-exclamation-sign panel-close" aria-hidden="true" > </i> -->
+                <div class="panel-heading">
+                  <div class="flex-row">
+                    <i class="glyphicon glyphicon-exclamation-sign panel-icon" aria-hidden="true" > </i>
+                    <div>
+                      <div class="panel-number text-right">
+                        <span><%= @employees_not_signed_up %></span>
+                      </div>
+                      <div class="text-right">
+                        <span>Employees Not Signed Up</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer" >
+                  <div class="flex-row">
+                    <%= link_to "View Details", nil, class:"panel-link" %>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+
+
+
+            </div>
+
+
+
           </div>
 
 
 
+          <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
         </div>
+        <table class="table table-striped table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Manager</th>
+              <th># of Entries</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @study.employees.each do |emp| %>
 
 
+            <tr data-link=<%= employee_path(emp.id) %>>
+              <td> <%= emp.id %></td>
+              <td> <%= emp.first_name %>   </td>
+              <td> <%= emp.last_name %>   </td>
+              <td> <%= emp.manager.full_name %>   </td>
+              <td> <%= emp.entries.count %>   </td>
+            </tr>
 
-        <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <% end %>
+          </tbody>
+        </table>
       </div>
-      <table class="table table-striped table-condensed">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Manager</th>
-            <th># of Entries</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @study.employees.each do |emp| %>
-
-
-          <tr data-link=<%= employee_path(emp.id) %>>
-            <td> <%= emp.id %></td>
-            <td> <%= emp.first_name %>   </td>
-            <td> <%= emp.last_name %>   </td>
-            <td> <%= emp.manager.full_name %>   </td>
-            <td> <%= emp.entries.count %>   </td>
-          </tr>
-
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+      </div>
   </div>
-  <div class="col-sm-4 sidebar-wrapper-right-padding">
-    <div class="panel panel-default">
+
+
+
+  <div class="col-sm-3 sidebar-wrapper-right-padding">
+    <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">
           Actions
         </h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body  action-wrapper">
 
 
             <div class="btn-group-vertical" style="width: 100%;">
 
 
-              <%= link_to 'Excel Download last mgr', ind_participant_download_path(@manager, :format => :xlsx) %>
+
               <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default", method: :get %>
               <% if @study.manager_surveys.present? %>
@@ -180,9 +251,15 @@
               <% else %>
                 <%= link_to "View Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>
-
-
-
+            </div>
+            <div class="btn-group-vertical" style="width: 100%;">
+              <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
+              <%= link_to "Create Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default", method: :get %>
+              <% if @study.employee_surveys.present? %>
+                <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_surveys.last), class: "btn btn-default", method: :get %>
+              <% else %>
+                <%= link_to "View Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
+              <% end %>
             </div>
 
 
@@ -192,6 +269,24 @@
     </div>
   </div>
 </div>
+
+  <script>
+  $(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-collapse-wrapper').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-collapse-wrapper').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+
+  </script>
+
+
 
 
   <!-- <script>

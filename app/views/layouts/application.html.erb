@@ -9,52 +9,9 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
 
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mhapp-navbar" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Brand</a>
-      </div>
+    <%= render "layouts/navbar" %>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="mhapp-navbar">
-
-
-        <% if user_signed_in? %>
-          <ul class="nav navbar-nav navbar-right">
-
-            <% if current_user.employee? %>
-              <li><a href="#">Hello, <%= current_user.full_name %></a></li>
-              <li><%= link_to "Take Survey", new_employee_employee_entry_path(current_user) %></li>
-            <% elsif current_user.manager? %>
-              <li><a href="#">Hello, <%= current_user.full_name %></a></li>
-              <li><%= link_to "Take Survey", new_manager_manager_entry_path(current_user) %></li>
-            <% elsif current_guser.researcher? %>
-              <li><a href="#">Hello, <%= current_user.full_name %></a></li>
-              <li><%= link_to "Researcher Dashboard", studies_path %></li>
-            <% end %>
-
-            <li><%= link_to "Sign Out", new_session_path, method: :delete %></li>
-
-          </ul>
-        <% else %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Sign In", new_session_path %></li>
-            <li><%= link_to "Sign Up", new_researcher_path %></li>
-
-
-          </ul>
-        <% end %>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
     <div class="main">
 
       <div class="container-fluid">

@@ -15,7 +15,7 @@
 
       <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
       <% @manager.employees.each_with_index do |employee, index| %>
-      <div id= <%= employee.id %> class="tab-pane <%=  index == 0 ? 'active' : ''  %> ">
+      <div id= <%= employee.id %> class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
         <h3>Reviewing: <%= employee.full_name %> </h3>
         <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post do %>
         <input type="hidden" name="target_person_id" value = <%= employee.id %>>

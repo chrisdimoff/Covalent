@@ -28,7 +28,7 @@ i.panel-close {
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items:center;
 }
 
 
@@ -43,6 +43,7 @@ i.panel-close {
     color: white;
   }
 }
+
 .panel-red {
   background-color: #D9534F;
 
@@ -74,6 +75,6 @@ a .panel {
   color:black;
 }
 
-.panel-body .btn-group-vertical:first-child {
+.panel-body .btn-group-vertical {
   margin-bottom: 10px;
 }

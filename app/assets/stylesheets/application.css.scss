@@ -17,12 +17,15 @@
  *= require_self
  *= require bootstrap-modal-bs3patch
  *= require bootstrap-modal
- *=require bootstrap-select
+ *= require bootstrap-select
+ *= require bootstrap-paper
+ *= require bootstrap.vertical-tabs
  */
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import 'bootstrap.vertical-tabs.css.scss';
+ @import "bootstrap-paper";
+ @import "layout";
  @import "studies";
  @import "manager_surveys";
- @import "layout";
- @import 'bootstrap.vertical-tabs.css.scss'

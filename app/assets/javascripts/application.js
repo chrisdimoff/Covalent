@@ -21,7 +21,7 @@
 //= require bootstrap-select
 //= require bootstrap/alert
 //= require bootstrap/dropdown
-//= require bootstrap/tab
+//= require bootstrap
 //= require cocoon
 //= require highcharts
 //= require chartkick

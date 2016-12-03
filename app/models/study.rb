@@ -16,4 +16,9 @@ class Study < ApplicationRecord
   has_many :employee_surveys, dependent: :destroy
 
   has_many :entries, dependent: :destroy
+
+  validates :num_of_managers, presence: true
+  validates :num_of_employees, presence: true
+  validates :title, presence: true
+
 end
