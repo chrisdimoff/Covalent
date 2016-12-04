@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+@import url("https://assets.googleapis.com/css?family=Roboto:300,400,500,700");
 /*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
@@ -269,8 +269,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../assets/glyphicons-halflings-regular.woff2') format('woff2'), url('../assets/glyphicons-halflings-regular.woff') format('woff'), url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -4019,6 +4019,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a > img {
   max-width: none;
 }
+
 /*.nav-tabs {
   border-bottom: 1px solid transparent;
 }
@@ -4034,8 +4035,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav-tabs > li > a:hover {
   border-color: #eeeeee #eeeeee transparent;
-}*/
-/*.nav-tabs > li.active > a,
+}
+.nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #666666;
@@ -4045,6 +4046,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-color: transparent;
   cursor: default;
 }*/
+
+
 .nav-tabs.nav-justified {
   width: 100%;
   border-bottom: 0;

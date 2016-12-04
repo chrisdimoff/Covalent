@@ -18,10 +18,10 @@
 //= require_tree .
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
-//= require bootstrap-select
-//= require bootstrap/alert
-//= require bootstrap/dropdown
+// require bootstrap/alert
+// require bootstrap/dropdown
 //= require bootstrap
+//= require bootstrap-select
 //= require cocoon
 //= require highcharts
 //= require chartkick
