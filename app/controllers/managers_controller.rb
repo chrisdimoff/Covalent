@@ -21,17 +21,18 @@ class ManagersController < ApplicationController
        study_id = request_params['id'].first.to_i
        @manager = Manager.new manager_params
        @manager.study = Study.find study_id
+       if @manager.save
+         session[:user_id] = @manager.id
+         redirect_to root_path, notice: 'Thank you for signing up'
+       else
+         puts @manager.errors
+         render :new
+       end
     end
 
 
 
 
-    if @manager.save
-      session[:user_id] = @manager.id
-      redirect_to root_path, notice: 'Thank you for signing up'
-    else
-      render :new
-    end
   end
 
   def show

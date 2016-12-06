@@ -72,11 +72,7 @@
         <div class="row">
           <div class="col-xs-6">
             Managers
-            <%= study.manager_green_width %>
-            <%= study.manager_red_width %>
-            <%= study.num_of_not_signed_up_managers %>
-            <%= study.manager_color_total %>
-            <%= study.num_of_not_signed_up_managers %>
+
             <div class="progress">
               <div class="progress-bar progress-bar-success"
               style="width: <%= study.manager_green_width %>%">
@@ -84,7 +80,7 @@
             <div class="progress-bar progress-bar-warning"
             style="width: <%= study.manager_yellow_width %>%"></div>
             <div class="progress-bar progress-bar-danger"
-            style="width: <%= (study.num_of_not_signed_up_managers / study.manager_color_total) %>%"></div>
+            style="width: <%= study.manager_red_width %>%"></div>
           </div>
 
 

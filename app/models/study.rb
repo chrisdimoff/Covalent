@@ -41,33 +41,37 @@ class Study < ApplicationRecord
   end
 
   def num_of_not_signed_up_managers
-    self.num_of_managers - self. num_of_signed_up_managers if self.num_of_managers
+    number = self.num_of_managers - self.num_of_signed_up_managers
+    if number < 0
+      return 0
+    else
+      return number
+    end
   end
 
   def num_of_active_managers
-    self.num_of_signed_up_managers - self.num_of_inactive_managers
+    self.managers.count - self.num_of_inactive_managers
   end
 
   def manager_color_total
-    sum = ( num_of_active_managers +
-      num_of_inactive_managers +
-      num_of_not_signed_up_managers)
+    sum = ( self.num_of_active_managers +
+      self.num_of_inactive_managers +
+      self.num_of_not_signed_up_managers)
   end
 
   def manager_green_width
-    (self.num_of_active_managers / self.manager_color_total)* 100
+    (self.num_of_active_managers.to_f / self.manager_color_total.to_f) * 100
   end
 
   def manager_yellow_width
-    (self.num_of_inactive_managers / self.manager_color_total) * 100
+    (self.num_of_inactive_managers.to_f / self.manager_color_total.to_f) * 100
   end
 
   def manager_red_width
     ((self.num_of_not_signed_up_managers / self.manager_color_total) * 100)
   end
-
   def num_of_inactive_employees
-    if self.num_of_employees
+    if self.num_of_employees > 0
       inactive_employees = []
       self.employees.each do |mgr|
         num_of_entries = mgr.entries.where(study_id: self.id).count
@@ -86,30 +90,37 @@ class Study < ApplicationRecord
   end
 
   def num_of_not_signed_up_employees
-    self.num_of_employees - self. num_of_signed_up_employees if self.num_of_employees
+    number = self.num_of_employees - self.num_of_signed_up_employees
+    if number < 0
+      return 0
+    else
+      return number
+    end
   end
 
   def num_of_active_employees
-    self.num_of_signed_up_employees - self.num_of_inactive_employees
+    self.employees.count - self.num_of_inactive_employees
   end
 
   def employee_color_total
-    ( self.num_of_active_employees +
+    sum = ( self.num_of_active_employees +
       self.num_of_inactive_employees +
       self.num_of_not_signed_up_employees)
   end
 
   def employee_green_width
-    (self.num_of_active_employees / self.employee_color_total) * 100
+    (self.num_of_active_employees.to_f / self.employee_color_total.to_f) * 100
   end
 
   def employee_yellow_width
-    (self.num_of_inactive_employees / self.employee_color_total) * 100
+    (self.num_of_inactive_employees.to_f / self.employee_color_total.to_f) * 100
   end
 
   def employee_red_width
-    (self.num_of_not_signed_up_employees / self.employee_color_total) * 100
+    ((self.num_of_not_signed_up_employees / self.employee_color_total) * 100)
   end
+
+
 
   def last_response
     if self.entries.count > 0
