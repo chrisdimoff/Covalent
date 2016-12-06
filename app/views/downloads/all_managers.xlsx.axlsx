@@ -29,7 +29,7 @@ wb = xlsx_package.workbook
 
       manager.employees.each do |emp|
         # count max num_of_entries
-        num_of_entries = manager.entries.where(target_person_id: emp.id).count
+        num_of_entries = manager.entries.where(manager_survey_id: survey.id, target_person_id: emp.id).count
          if num_of_entries > max_entries
            max_entries = num_of_entries
          end
@@ -82,13 +82,14 @@ wb = xlsx_package.workbook
    end
 
     #add whitespace to option headings
-    5.times do
+    10.times do
       option_content_headings_master.unshift(" ")
     end
 
     # add headings and q_with_options together (first row)
     headings = headings + q_with_options_master
     sheet.add_row(headings)
+    sheet.add_row(option_content_headings_master)
     manager_employee_content.each do |manager_info, employee_rows|
       sheet.add_row(manager_info)
       employee_rows.each do |emp_row|
@@ -96,5 +97,7 @@ wb = xlsx_package.workbook
       end
       sheet.add_row()
     end
+
+
   end
 end
