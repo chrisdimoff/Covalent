@@ -16,11 +16,13 @@ class ManagersController < ApplicationController
     uri    = URI.parse(url)
     if uri.query.present?
        request_params = CGI.parse(uri.query)
+       @company = request_params['company'].first
+
        study_id = request_params['id'].first.to_i
+       @manager = Manager.new manager_params
+       @manager.study = Study.find study_id
     end
 
-    @manager = Manager.new manager_params
-    @manager.study = Study.find study_id
 
 
 

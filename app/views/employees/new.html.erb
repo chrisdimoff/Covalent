@@ -1,49 +1,50 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-      <h1>New Employee </h1>
-      <p>
-        For: <%= @company %>
-      </p>
-      <%= @employee.errors.full_messages.join(', ') %>
-      <%= form_tag('/employees', method: "Post") %>
+      <div class="well">
+
+        <legend><%= @company.titleize %> - Employee</legend>
+
+        <%= @employee.errors.full_messages.join(', ') %>
+        <%= form_tag('/employees', method: "Post") %>
         <div class="form-group">
           <%= label_tag :manager %>
           <%= select_tag(
-            :manager,
-            options_from_collection_for_select(@managers, :id, :full_name),
+          :manager,
+          options_from_collection_for_select(@managers, :id, :full_name),
 
-            { 'data-width' => "100%",
-              :class => "selectpicker",
-              'data-live-search' => true,
-              'title' => "Choose your manager",
-              required: true}) %>
+          { 'data-width' => "100%",
+            :class => "selectpicker",
+            'data-live-search' => true,
+            'title' => "Choose your manager",
+            required: true}) %>
 
-        </div>
+          </div>
 
-        <div class="form-group">
-          <%= label_tag :first_name %>
-          <%= text_field_tag :first_name, "", class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :last_name %>
-          <%= text_field_tag :last_name, "", class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :email %>
-          <%= email_field_tag :email, "", class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :password %>
-          <%= password_field_tag :password, "", class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag :password_confirmation %>
-          <%= password_field_tag :password_confirmation, "", class: "form-control" %>
-        </div>
+          <div class="form-group">
+            <%= label_tag :first_name %>
+            <%= text_field_tag :first_name, "", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :last_name %>
+            <%= text_field_tag :last_name, "", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :email %>
+            <%= email_field_tag :email, "", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :password %>
+            <%= password_field_tag :password, "", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :password_confirmation %>
+            <%= password_field_tag :password_confirmation, "", class: "form-control" %>
+          </div>
 
 
-        <%= submit_tag "Sign Up", class: "btn btn-default", style: "width: 50%;" %>
+          <%= submit_tag "Sign Up", class: "btn btn-primary", style: "width: 50%;" %>
+      </div>
 
     </div>
   </div>

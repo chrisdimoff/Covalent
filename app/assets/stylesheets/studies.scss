@@ -5,14 +5,51 @@
 
 .check-wrapper-builder {
   display: flex;
-  
+
+}
+
+.company-title {
+  vertical-align:super;
+  font-size: 2rem;
+  color: #2196F3
+}
+
+.status-label {
+  width: 100%
+}
+
+#entry-count-label {
+  display: inline-block;
+  float: none;
+  font-size: 5rem;
+  color: #599D97;
+}
+#last-response-label {
+  display: inline-block;
+  float: none;
+  font-size: 2rem;
+  color: #599D97;
+}
+
+
+
+.vcenter {
+  display: flex;
+  align-items:center;
+}
+
+.info-label {
+  color: grey;
+  vertical-align: top;
 }
 
 
 span.glyphicon-file {
-  display: block;
+  display: inline-block;
   font-size: 3rem;
   text-align: center;
+  color: #2196F3;
+  opacity: 0.5
 }
 i.panel-icon {
   display: block;

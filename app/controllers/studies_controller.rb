@@ -4,6 +4,8 @@ class StudiesController < ApplicationController
   before_action :authorize_access, only: [:show, :destroy]
   def index
     @studies = current_user.studies
+
+    
   end
 
   def new

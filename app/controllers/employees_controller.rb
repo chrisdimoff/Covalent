@@ -22,6 +22,13 @@ class EmployeesController < ApplicationController
     if uri.query.present?
        request_params = CGI.parse(uri.query)
        study_id = request_params['id'].first.to_i
+       @company = request_params['company'].first
+       manager_params = params.permit(:manager)
+
+       manager_id = manager_params['manager'].to_i
+
+       @manager = Manager.find manager_id
+
     end
 
 
@@ -30,11 +37,8 @@ class EmployeesController < ApplicationController
                                         :email,
                                         :password,
                                         :password_confirmation])
-    manager_params = params.permit(:manager)
 
-    manager_id = manager_params['manager'].to_i
 
-    @manager = Manager.find manager_id
 
     @employee = Employee.new employee_params
     @employee.manager = @manager

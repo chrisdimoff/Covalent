@@ -27,7 +27,7 @@
           <li><%= link_to "Take Survey", new_manager_manager_entry_path(current_user) %></li>
         <% elsif current_user.researcher? %>
           <li><a href="#">Hello, <%= current_user.full_name %></a></li>
-          <li><%= link_to "Research Dashboard", studies_path %></li>
+          <li><%= link_to "Studies", studies_path %></li>
         <% end %>
 
         <li><%= link_to "Sign Out", session_path(current_user), method: :delete %></li>
