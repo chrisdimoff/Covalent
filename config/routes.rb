@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: [:show, :new, :create, :destroy]
   resources :employees, only: [:show, :new, :create, :destroy] do
+    get '/download' => 'downloads#ind_employee', as: :ind_download
     resources :employee_entries, only: [:show, :new, :create, :destroy]
 
   end

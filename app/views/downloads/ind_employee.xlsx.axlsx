@@ -1,0 +1,94 @@
+
+wb = xlsx_package.workbook
+
+@surveys.each do |survey|
+  wb.add_worksheet(name: "#{survey.form_name}") do |sheet|
+
+    # intialize first part of first row (first row)
+    headings = ["Id", "First Name", "Last Name", "E-Mail", "Role", "Employee Id", "Manager's Id", "Manager's First Name", "Manager's Last Name", "Manager's E-mail"]
+
+    q_with_options = ["Entry Date"]
+    option_content_headings = [" "]
+
+    # build question headings based on first entry
+    survey.entries.where(employee_id: @employee.id)
+    .first.content['data'].each do |q_num, data_object|
+
+      data_object['response'].each do |opt_num, option_data|
+        q_with_options.push("#{q_num}_#{opt_num}")
+        option_content_headings.push(option_data['content'])
+
+      end
+    end
+
+
+
+    # make manager info (entire second row)
+    employee_info = [@employee.id, @employee.first_name, @employee.last_name, @employee.email, @employee.type]
+
+    #initialize array to store all of the employee response rows
+    manager_rows = []
+
+    max_entries = 0
+    man = @employee.manager
+
+      # count max num_of_entries
+      num_of_entries = @employee.entries.where(target_person_id: man.id).count
+       if num_of_entries > max_entries
+         max_entries = num_of_entries
+       end
+
+      #initialize response row (will be recycled and used for each employee)
+      response_row = [" ", " ", " ", " ", " "]
+
+      # create employee info array (to be added to end of response row)
+      manager_info = [@employee.id, man.id, man.first_name, man.last_name, man.email ]
+
+      # add employee info to response row
+      response_row = response_row + manager_info
+
+      #get responses pertaining to employee
+      @employee.entries.where(target_person_id: man.id, employee_survey_id: survey.id )
+      .each do |entry|
+        response_row.push(entry.created_at) # add date to response row
+        entry.content['data'].each do |q_num, question_object|
+          question_object['response'].each do |opt_num, option_data|
+            response_row.push(option_data['value'])
+          end
+        end
+      end
+
+      #add response row to employee_rows array
+      manager_rows.push(response_row)
+    # end
+
+
+    #add another set of headers for each entry with an additiona' '_#'
+    q_with_options_master = q_with_options
+    option_content_headings_master = option_content_headings
+
+    entry_num = 1
+   (max_entries - 1).times do
+     q_with_options_master = q_with_options_master + q_with_options.map {|q_opt| "#{q_opt}_#{entry_num + 1}"}
+     option_content_headings_master = option_content_headings_master + option_content_headings
+     entry_num = entry_num + 1
+   end
+
+
+
+    #add whitespace to option headings
+    5.times do
+      option_content_headings_master.unshift(" ")
+    end
+
+    # add headings and q_with_options together (first row)
+    headings = headings + q_with_options_master
+
+    sheet.add_row(headings)
+    sheet.add_row(employee_info + option_content_headings_master)
+    manager_rows.each do |man_row|
+      sheet.add_row(man_row)
+    end
+
+  end
+end

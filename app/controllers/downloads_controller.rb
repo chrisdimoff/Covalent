@@ -1,6 +1,7 @@
 class DownloadsController < ApplicationController
   before_action :find_participant, only:[:ind_participant]
   before_action :find_manager, only: [:ind_manager]
+  before_action :find_employee, only: [:ind_employee]
 
   def ind_participant
     @entries = @participant.entries
@@ -24,11 +25,22 @@ class DownloadsController < ApplicationController
     end
   end
 
+  def ind_employee
+    @study = @employee.study
+    @surveys = @study.employee_surveys
+    respond_to do |format|
+    format.html # don't forget if you pass html
+    format.xlsx {
+      response.headers['Content-Disposition'] = "attachment; filename='#{@employee.full_name}.xlsx'"
+    }
+    end
+  end
+
   def all_managers
     @study = Study.find params[:study_id]
     @surveys = @study.manager_surveys
     @managers = @study.managers
-    
+
     respond_to do |format|
     format.html # don't forget if you pass html
     format.xlsx {
@@ -56,6 +68,10 @@ class DownloadsController < ApplicationController
 
   def find_manager
     @manager = User.find params[:manager_id]
+  end
+  
+  def find_employee
+    @employee = User.find params[:employee_id]
   end
 
 

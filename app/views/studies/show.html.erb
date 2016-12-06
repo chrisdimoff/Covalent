@@ -197,6 +197,7 @@
               <th>Last Name</th>
               <th>Manager</th>
               <th># of Entries</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -209,6 +210,7 @@
               <td> <%= emp.last_name %>   </td>
               <td> <%= emp.manager.full_name %>   </td>
               <td> <%= emp.entries.count %>   </td>
+              <td> <%= link_to "Download", employee_ind_download_path(emp.id, :format => :xlsx) %></td>
             </tr>
 
             <% end %>
