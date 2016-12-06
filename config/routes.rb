@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :studies do
     get '/managers-download' => 'downloads#all_managers', as: :all_managers_download
+    get '/employees-download' => 'downloads#all_employees', as: :all_employees_download
     resources :manager_surveys
     resources :employee_surveys, only: [:show, :new, :create, :destroy]
   end

@@ -31,7 +31,18 @@ class DownloadsController < ApplicationController
     respond_to do |format|
     format.html # don't forget if you pass html
     format.xlsx {
-      response.headers['Content-Disposition'] = "attachment; filename='#{@study.title}.xlsx'"
+      response.headers['Content-Disposition'] = "attachment; filename='#{@study.title}--Managers.xlsx'"
+    }
+    end
+  end
+  def all_employees
+    @study = Study.find params[:study_id]
+    @surveys = @study.employee_surveys
+    @employees = @study.employees
+    respond_to do |format|
+    format.html # don't forget if you pass html
+    format.xlsx {
+      response.headers['Content-Disposition'] = "attachment; filename='#{@study.title}--Employees.xlsx'"
     }
     end
   end

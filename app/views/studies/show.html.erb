@@ -220,7 +220,7 @@
 
 
 
-  <div class="col-sm-3 sidebar-wrapper-right-padding">
+  <div class="col-sm-3 sidebar-wrapper">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -234,7 +234,7 @@
 
 
 
-              <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
+              <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-primary", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default", method: :get %>
               <% if @study.manager_surveys.present? %>
                 <%= link_to "View Manager Form", study_manager_survey_path(@study, @study.manager_surveys.last), class: "btn btn-default", method: :get %>
@@ -242,12 +242,11 @@
                 <%= link_to "View Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>
 
-              <button class="btn btn-default"> View/Edit Manager Form</button>
             </div>
 
 
             <div class="btn-group-vertical" style="width: 100%;">
-              <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
+              <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-primary", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default", method: :get %>
               <% if @study.employee_surveys.present? %>
                 <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_surveys.last), class: "btn btn-default", method: :get %>
@@ -258,16 +257,45 @@
 
             <div class="btn-group-vertical" style="width: 100%;">
 
-              <%= link_to "Download", study_all_managers_download_path(@study.id, :format => :xlsx) %>
+              <div class="btn-group">
+                    <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      Download Data
+                      <!-- <span class="caret"></span> -->
+                    </a>
+                    <ul class="dropdown-menu" style="width: 100%;">
+                      <li class="text-center">
+                        <!-- <a href="#">Dropdown link</a> -->
+                        <% if @study.entries.where.not(manager_survey_id: nil).present? %>
 
-              <%= link_to "Download All Manager Data", study_all_managers_download_path(@study, :format => :xlsx), class: "btn btn-default", method: :get, remote: true %>
+                        <%= link_to "All Manager Data", study_all_managers_download_path(@study.id, :format => :xlsx), class: 'btn btn-link' %>
 
-              <%= link_to "Create Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default", method: :get %>
-              <% if @study.employee_surveys.present? %>
-                <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_surveys.last), class: "btn btn-default", method: :get %>
-              <% else %>
-                <%= link_to "View Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
-              <% end %>
+                        <% else %>
+
+                          <%= link_to "Manager Data (No Responses)", study_all_managers_download_path(@study.id, :format => :xlsx), class: 'btn btn-link disabled' %>
+
+                        <% end %>
+
+                      </li>
+                      <li class="text-center">
+                        <% if @study.entries.where.not(employee_survey_id: nil).present? %>
+
+                        <%= link_to "All Employee Data", study_all_employees_download_path(@study.id, :format => :xlsx), class: 'btn btn-link'  %>
+
+                        <% else %>
+
+                          <%= link_to "Employee Data (No Responses)", study_all_employees_download_path(@study.id, :format => :xlsx), class: 'btn btn-link disabled' %>
+
+                        <% end %>
+
+                      </li>
+                     </ul>
+              </div>
+
+
+
+
+
+
             </div>
 
 

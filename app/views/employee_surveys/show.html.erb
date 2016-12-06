@@ -4,7 +4,7 @@
     <h1><%= @employee_survey.form_name %></h1>
       <% @employee_survey.questions.each_with_index do |question, index| %>
         <% if question.mc? %>
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Question <%=index + 1 %></h3>
           </div>
@@ -22,8 +22,40 @@
           </div>
         </div>
         <% elsif question.matrix? %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%=index + 1 %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <table class="table table-condensed" id="matrix-table">
+              <thead>
+                <tr>
+                    <th class="first-heading"> </th>
+                  <% question.headings.each do |heading| %>
+                    <th><%= heading %></th>
+                  <% end %>
+                </tr>
+              </thead>
+
+
+                <% question.options.each_with_index do |option, index| %>
+                <tr>
+                  <td><%= option.content %></td>
+                  <% i = 1 %>
+                  <% option.num_of_selections.times do  %>
+                  <td><label class="radio-inline"> <input name=<%= "#{index}"  %> type="radio" ><%= i %></label></td>
+                    <% i = i + 1  %>
+                    <% end %>
+
+                </tr>
+
+              <% end %>
+            </table>
+            </div>
+          </div>
         <% elsif question.checklist? %>
-          <div class="panel panel-default">
+          <div class="panel panel-primary">
             <div class="panel-heading">
               <h3 class="panel-title">Question <%=index + 1 %></h3>
             </div>
