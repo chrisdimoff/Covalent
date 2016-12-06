@@ -103,7 +103,7 @@
               <td> <%= mgr.last_name %>   </td>
               <td> <%= mgr.employees.count %>   </td>
               <td> <%= mgr.entries.count %>   </td>
-              <td> <%= link_to "Download", ind_manager_download_path(mgr.id, :format => :xlsx) %></td>
+              <td> <%= link_to "Download", manager_ind_download_path(mgr.id, :format => :xlsx) %></td>
             </tr>
 
             <% end %>
@@ -255,8 +255,13 @@
                 <%= link_to "View Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>
             </div>
+
             <div class="btn-group-vertical" style="width: 100%;">
-              <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-default", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
+
+              <%= link_to "Download", study_all_managers_download_path(@study.id, :format => :xlsx) %>
+
+              <%= link_to "Download All Manager Data", study_all_managers_download_path(@study, :format => :xlsx), class: "btn btn-default", method: :get, remote: true %>
+
               <%= link_to "Create Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default", method: :get %>
               <% if @study.employee_surveys.present? %>
                 <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_surveys.last), class: "btn btn-default", method: :get %>

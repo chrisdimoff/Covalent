@@ -5,7 +5,7 @@ wb = xlsx_package.workbook
   wb.add_worksheet(name: "#{survey.form_name}") do |sheet|
 
     # intialize first part of first row (first row)
-    headings = ["Id", "First Name", "Last Name", "E-Mail", "Role", "Emp ID", "Emp First Name", "Emp Last Name", "Emp E-mail"]
+    headings = ["Id", "First Name", "Last Name", "E-Mail", "Role", "Manager Id", "Emp ID", "Emp First Name", "Emp Last Name", "Emp E-mail"]
 
     q_with_options = ["Entry Date"]
     option_content_headings = [" "]
@@ -42,7 +42,7 @@ wb = xlsx_package.workbook
       response_row = [" ", " ", " ", " ", " "]
 
       # create employee info array (to be added to end of response row)
-      employee_info = [emp.id, emp.first_name, emp.last_name, emp.email ]
+      employee_info = [emp.manager.id, emp.id, emp.first_name, emp.last_name, emp.email ]
 
       # add employee info to response row
       response_row = response_row + employee_info
@@ -77,7 +77,7 @@ wb = xlsx_package.workbook
 
 
     #add whitespace to option headings
-    4.times do
+    5.times do
       option_content_headings_master.unshift(" ")
     end
 

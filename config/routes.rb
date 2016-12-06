@@ -4,14 +4,14 @@ Rails.application.routes.draw do
 
   get 'links/employee' => 'links#employee', as: :employee_link
 
-  get 'users/:id/download' => 'downloads#ind_manager_download', as: :ind_manager_download
-  get 'users/:id/download' => 'downloads#ind_participant', as: :ind_participant_download
 
   resources :studies do
+    get '/managers-download' => 'downloads#all_managers', as: :all_managers_download
     resources :manager_surveys
     resources :employee_surveys, only: [:show, :new, :create, :destroy]
   end
   resources :managers, only: [:show, :new, :create, :destroy] do
+    get '/download' => 'downloads#ind_manager', as: :ind_download
     resources :manager_entries, only: [:show, :new, :create, :destroy]
   end
   resources :sessions, only: [:show, :new, :create, :destroy]
