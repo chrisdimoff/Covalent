@@ -36,6 +36,11 @@ class ManagerSurveysController < ApplicationController
       end
   end
 
+  def index
+    @study = Study.find params[:study_id]
+    @manager_surveys = @study.manager_surveys
+  end
+
   def show
     @manager_survey = ManagerSurvey.find params[:id]
 

@@ -22,6 +22,7 @@
 // require bootstrap/dropdown
 //= require bootstrap
 //= require bootstrap-select
+//= require bootstrap-toggle.min
 //= require cocoon
 //= require highcharts
 //= require chartkick

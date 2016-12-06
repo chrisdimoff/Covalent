@@ -1,0 +1,36 @@
+<div class="row vcenter">
+  <% @manager_surveys.each do |survey| %>
+  <div class="col-xs-6 col-xs-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= survey.form_name %></h3>
+      </div>
+      <div class="panel-body">
+        <input type="checkbox"
+        checked data-toggle="toggle"
+        data-onstyle="success"
+        data-offstyle="danger"
+        data-on="Active"
+        data-off="Inactive"
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-2">
+    Status
+  </div>
+  <% end %>
+</div>
+
+<script>
+
+    // $('input[type="checkbox"]').bootstrapToggle({
+    //   off: 'Disabled',
+    //   on: 'Enabled',
+    //
+    // });
+
+    $('input[type="checkbox"]').bootstrapToggle('off')
+
+</script>

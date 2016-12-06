@@ -20,6 +20,7 @@
  *= require bootstrap-paper
  *= require bootstrap-select
  *= require bootstrap.vertical-tabs
+ *= require bootstrap-toggle.min
  */
 
  @import 'bootstrap.vertical-tabs.css.scss';
@@ -27,3 +28,4 @@
  @import "layout";
  @import "studies";
  @import "manager_surveys";
+ @import "bootstrap-toggle.min"
