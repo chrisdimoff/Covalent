@@ -28,6 +28,7 @@ class DownloadsController < ApplicationController
     @study = Study.find params[:study_id]
     @surveys = @study.manager_surveys
     @managers = @study.managers
+    
     respond_to do |format|
     format.html # don't forget if you pass html
     format.xlsx {
@@ -39,6 +40,7 @@ class DownloadsController < ApplicationController
     @study = Study.find params[:study_id]
     @surveys = @study.employee_surveys
     @employees = @study.employees
+
     respond_to do |format|
     format.html # don't forget if you pass html
     format.xlsx {

@@ -11,7 +11,7 @@ class ManagerEntriesController < ApplicationController
         whitelisted['data'] = params['data']
     end
 
-
+    
     @study = @manager.study
     @survey = @study.manager_surveys.last
 

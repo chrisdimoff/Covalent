@@ -3,6 +3,7 @@
   <div class="col-sm-8 col-sm-offset-2">
     <h1>Hello, <%= @employee.first_name.capitalize %> </h1>
     <%= form_tag employee_employee_entries_path(@employee, @entry), method: :post %>
+      <input type="hidden" name="target_person_id" value = <%= @employee.manager.id %>>
 
       <% @survey.questions.each_with_index do |question, index| %>
         <% q_num = index + 1 %>
@@ -15,7 +16,7 @@
             <%= question.body %>
             <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
             <div class="mc-options">
-              <% question.options.each do |option| %>
+              <% question.options.each_with_index do |option, index| %>
               <div class="radio">
                 <label>
                   <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
@@ -30,6 +31,18 @@
               <% end %>
             </div>
 
+            <script>
+            // This script allows the radio buttons to have
+            //  different names (as per passing a hash). It simulates the regular radio
+            // by allowing only 1 per group to be clicked.
+            $('.mc-options input[type="radio"]').on('change', function(){
+              $(this).parents('.mc-options').find('input[type="radio"]').each(function(){
+                $(this).prop('checked', false);
+              });
+
+              $(this).prop('checked', true);
+            })
+            </script>
 
           </div>
         </div>
@@ -45,39 +58,39 @@
             <table class="table table-condensed" id="matrix-table">
               <thead>
                 <tr>
-                    <th class="first-heading"> </th>
+                  <th class="first-heading"> </th>
                   <% question.headings.each do |heading| %>
-                    <th><%= heading %></th>
+                  <th><%= heading %></th>
                   <% end %>
                 </tr>
               </thead>
 
 
-                <% question.options.each_with_index do |option, index| %>
-                <tr>
-                  <td><%= option.content %></td>
-                  <% i = 1 %>
-                  <% option.num_of_selections.times do  %>
-                  <td>
-                    <label class="radio-inline">
-                      <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
-                      value= "<%= option.content %>" >
-                      <input
-                      name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
-                      value=<%= i %>
-                      type="radio" >
-                      <%= i %>
-                    </label>
-                  </td>
-                    <% i = i + 1  %>
-                  <% end %>
+              <% question.options.each_with_index do |option, index| %>
+              <tr>
+                <td><%= option.content %></td>
+                <% i = 1 %>
+                <% option.num_of_selections.times do  %>
+                <td>
+                  <label class="radio-inline">
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                    value= "<%= option.content %>" >
+                    <input
+                    name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                    value=<%= i %>
+                    type="radio" >
+                    <%= i %>
+                  </label>
+                </td>
+                <% i = i + 1  %>
+                <% end %>
 
-                </tr>
+              </tr>
 
               <% end %>
             </table>
-            </div>
           </div>
+        </div>
 
 
 
@@ -85,33 +98,33 @@
 
 
         <% elsif question.checklist? %>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Question <%=index + 1 %></h3>
-            </div>
-            <div class="panel-body">
-              <%= question.body %>
-              <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
-              <div class="checklist-options">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Question <%=index + 1 %></h3>
+          </div>
+          <div class="panel-body">
+            <%= question.body %>
+            <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+            <div class="checklist-options">
 
-                <% question.options.each_with_index do |option, index| %>
-                <div class="checkbox">
-                  <label>
-                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
-                    value= 0 >
-                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
-                    value= "<%= option.content %>" >
+              <% question.options.each_with_index do |option, index| %>
+              <div class="checkbox">
+                <label>
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                  value= 0 >
+                  <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                  value= "<%= option.content %>" >
 
-                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
-                    value= 1>
+                  <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                  value= 1>
 
-                    <%= option.content %>
-                  </label>
-                </div>
-                <% end %>
+                  <%= option.content %>
+                </label>
               </div>
+              <% end %>
             </div>
           </div>
+        </div>
         <% end %>
       <% end %>
     <%= submit_tag "Submit Entry", class: "btn btn-primary"%>

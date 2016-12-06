@@ -14,9 +14,8 @@
           whitelisted['data'] = params['data']
       end
 
-
       @study = @employee.study
-      @survey =@employee.study.employee_surveys.last
+      @survey = @employee.study.employee_surveys.last
 
       @entry = Entry.new(content: entry_params, study: @study, employee: @employee, employee_survey: @survey)
       @entry.content['form_name'] = @survey.form_name

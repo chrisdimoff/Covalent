@@ -4,7 +4,7 @@ wb = xlsx_package.workbook
 @surveys.each do |survey|
   wb.add_worksheet(name: "#{survey.form_name}") do |sheet|
     # intialize first part of first row (first row)
-    headings = ["Id", "First Name", "Last Name", "E-Mail", "Role", "Employee Id", "Manager ID", "Manager First Name", "Manager Last Name", "Manager E-mail"]
+    headings = ["Id", "First Name", "Last Name", "E-Mail", "Role", "Employee Id", "Manager's ID", "Manager's First Name", "Manager's Last Name", "Manager's E-mail"]
 
     q_with_options = ["Entry Date"]
     option_content_headings = [" "]
@@ -16,6 +16,7 @@ wb = xlsx_package.workbook
         option_content_headings.push(option_data['content'])
       end
     end
+
 
     employee_manager_content = {} #this will store data to be added to worksheet. manager info array is key, employee rows are the value
 
@@ -44,7 +45,7 @@ wb = xlsx_package.workbook
         response_row = response_row + manager_info
 
         #get responses pertaining to employee
-        employee.entries.where(target_person_id: man.id, manager_survey_id: survey.id )
+        employee.entries.where(target_person_id: man.id, employee_survey_id: survey.id )
         .each do |entry|
           response_row.push(entry.created_at) # add date to response row
           entry.content['data'].each do |q_num, question_object|
@@ -90,6 +91,7 @@ wb = xlsx_package.workbook
     headings = headings + q_with_options_master
     sheet.add_row(headings)
     sheet.add_row(option_content_headings_master)
+    byebug
     employee_manager_content.each do |employee_info, manager_rows|
       sheet.add_row(employee_info)
       manager_rows.each do |man_row|
