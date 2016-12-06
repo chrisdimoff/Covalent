@@ -103,7 +103,21 @@
               <td> <%= mgr.last_name %>   </td>
               <td> <%= mgr.employees.count %>   </td>
               <td> <%= mgr.entries.count %>   </td>
-              <td> <%= link_to "Download", manager_ind_download_path(mgr.id, :format => :xlsx) %></td>
+
+              <% if mgr.entries.present? %>
+              <td> <%= link_to  manager_ind_download_path(mgr.id, :format => :xlsx), class: "btn btn-primary btn-xs" do %>
+
+                        <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
+                  <% end %>
+              </td>
+              <% else %>
+              <td> <%= link_to  manager_ind_download_path(mgr.id, :format => :xlsx), class: "btn btn-primary btn-xs disabled" do %>
+
+                        <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
+                  <% end %>
+              </td>
+
+              <% end %>
             </tr>
 
             <% end %>
@@ -210,7 +224,18 @@
               <td> <%= emp.last_name %>   </td>
               <td> <%= emp.manager.full_name %>   </td>
               <td> <%= emp.entries.count %>   </td>
-              <td> <%= link_to "Download", employee_ind_download_path(emp.id, :format => :xlsx) %></td>
+              <% if emp.entries.present? %>
+                <td> <%= link_to  employee_ind_download_path(emp.id, :format => :xlsx), class: "btn btn-primary btn-xs" do %>
+
+                        <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
+                  <% end %>
+                </td>
+              <% else %>
+              <td> <%= link_to  employee_ind_download_path(emp.id, :format => :xlsx), class: "btn btn-primary disabled btn-xs" do%>
+                  <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
+                <% end %>
+              </td>
+              <% end %>
             </tr>
 
             <% end %>
