@@ -16,11 +16,11 @@
 //= require tether
 //= require turbolinks
 //= require_tree .
+//= require bootstrap
 //= require bootstrap-modal
 //= require bootstrap-modalmanager
 // require bootstrap/alert
 // require bootstrap/dropdown
-//= require bootstrap
 //= require bootstrap-select
 //= require bootstrap-toggle.min
 //= require cocoon

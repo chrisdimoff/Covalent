@@ -14,7 +14,9 @@ gem 'axlsx'
 gem 'axlsx_rails'
 gem 'chartkick'
 gem 'cancancan'
-gem 'rails_12factor', group: :production
+# gem 'rails_12factor', group: :production
+# gem 'sprockets_better_errors'
+
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
