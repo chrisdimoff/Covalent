@@ -13,6 +13,29 @@
   color: white;
 }
 
+.toggle-wrapper {
+  vertical-align: middle;
+  align-self:baseline;
+}
+
+.survey-thumbnail {
+  .thumbnail-body {
+    display: none
+  }
+}
+
+.survey-thumbnail:hover {
+  .thumbnail-body {
+    display: block;
+    overflow: scroll;
+    height: 400px;
+  }
+}
+
+.matrix-headings-thumbnail {
+  font-size: .8rem;
+}
+
 .mc-container {
   .radio {
     padding-left: 7%;

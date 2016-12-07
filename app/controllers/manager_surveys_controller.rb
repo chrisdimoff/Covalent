@@ -1,4 +1,7 @@
 class ManagerSurveysController < ApplicationController
+
+
+
   def new
     @study = Study.find(params[:study_id])
     @manager_survey = ManagerSurvey.new()
@@ -36,13 +39,34 @@ class ManagerSurveysController < ApplicationController
       end
   end
 
+  def set_status
+    @study = Study.find params[:study_id]
+    @manager_survey = ManagerSurvey.find params[:id]
+
+    if @manager_survey.active == false
+      @manager_survey.update_attribute(:active, true)
+      status = "Activated"
+    else
+      status = "Deactivated"
+      @manager_survey.update_attribute(:active, false)
+    end
+
+    if @manager_survey.save
+      redirect_to study_manager_surveys_path(@study), notice: "Survey #{status}"
+    else
+      render :index
+    end
+  end
+
   def index
     @study = Study.find params[:study_id]
-    @manager_surveys = @study.manager_surveys
+    @manager_surveys = @study.manager_surveys.order(created_at: :desc)
   end
 
   def show
     @manager_survey = ManagerSurvey.find params[:id]
 
   end
+
+
 end
