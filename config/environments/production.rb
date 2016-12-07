@@ -2,7 +2,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.assets.compile = true
-  config.assets.paths << "#{Rails}/vendor/assets/fonts"
+  # config.assets.paths << "#{Rails}/vendor/assets/fonts"
   # config.serve_static_assets = true
   # config.assets.digest = true
 
@@ -24,6 +24,7 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.assets.precompile += %w( '.woff', '.eot', '.svg', '.ttf' )
 
 
   # Compress JavaScripts and CSS.
