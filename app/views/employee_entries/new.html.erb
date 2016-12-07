@@ -1,11 +1,12 @@
 
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
+    <% if @survey %>
     <h1>Hello, <%= @employee.first_name.capitalize %> </h1>
     <%= form_tag employee_employee_entries_path(@employee, @entry), method: :post %>
       <input type="hidden" name="target_person_id" value = <%= @employee.manager.id %>>
 
-      <% if @survey %>
+
 
       <% @survey.questions.each_with_index do |question, index| %>
         <% q_num = index + 1 %>
@@ -130,12 +131,14 @@
         <% end %>
       <% end %>
     <%= submit_tag "Submit Entry", class: "btn btn-primary"%>
+
+    <% else %>
+
+    <h5>  There are no active surveys right now... Please contact the
+      researcher or try again later. </h5>
+
+      <% end %>
   </div>
 
-  <% else %>
 
-  <h5>  There are no active surveys right now... Please contact the
-    researcher or try again later. </h5>
-
-    <% end %>
 </div>

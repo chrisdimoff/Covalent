@@ -1,0 +1,176 @@
+
+<div class="row row-eq-height">
+  <div class="col-xs-2 " > <!-- required for floating -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tabs-left" style="height: 100vh">
+      <% @manager.employees.each_with_index do |emp, index| %>
+      <li class="<%=  index == 0 ? 'active' : ''  %>"><a href= #<%= emp.id %> data-toggle="tab"><%= emp.full_name %></a></li>
+
+      <% end %>
+    </ul>
+</div>
+
+  <div class="col-xs-10 ">
+    <div class="tab-content">
+
+      <h1>Hello, <%= @manager.first_name.capitalize %> </h1>
+
+      <% @manager.employees.each_with_index do |employee, index| %>
+      <div id= <%= employee.id %> class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
+
+        <h3>Reviewing: <%= employee.full_name %> </h3>
+        <%= form_tag manager_manager_entries_path(@manager, @entry), method: :post do %>
+        <input type="hidden" name="target_person_id" value = <%= employee.id %>>
+
+        <% if @survey %>
+          <% @survey.questions.each_with_index do |question, index| %>
+          <% q_num = index + 1 %>
+          <% if question.mc? %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Question <%= q_num %></h3>
+            </div>
+            <div class="panel-body">
+              <%= question.body %>
+              <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+              <div class="mc-options">
+                <% question.options.each_with_index do |option, index| %>
+                <div class="radio">
+                  <label>
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                    value= 0 >
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                    value= "<%= option.content %>" >
+                    <%= radio_button_tag "data[q#{q_num}][response][opt#{index + 1}][value]",  1 %>
+
+                    <%= option.content  %>
+                  </label>
+                </div>
+                <% end %>
+              </div>
+
+              <script>
+              // This script allows the radio buttons to have
+              //  different names (as per passing a hash). It simulates the regular radio
+              // by allowing only 1 per group to be clicked.
+              $('.mc-options input[type="radio"]').on('change', function(){
+                $(this).parents('.mc-options').find('input[type="radio"]').each(function(){
+                  $(this).prop('checked', false);
+                });
+
+                $(this).prop('checked', true);
+              })
+              </script>
+
+            </div>
+          </div>
+          <% elsif question.matrix? %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Question <%=index + 1 %></h3>
+            </div>
+            <div class="panel-body">
+              <%= question.body %>
+              <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+
+              <table class="table table-condensed" id="matrix-table">
+                <thead>
+                  <tr>
+                    <th class="first-heading"> </th>
+                    <% question.headings.each do |heading| %>
+                    <th><%= heading %></th>
+                    <% end %>
+                  </tr>
+                </thead>
+
+
+                <% question.options.each_with_index do |option, index| %>
+                <tr>
+                  <td><%= option.content %></td>
+                  <% i = 1 %>
+                  <% option.num_of_selections.times do  %>
+                  <td>
+                    <label class="radio-inline">
+                      <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                      value= "<%= option.content %>" >
+                      <input
+                      name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                      value=<%= i %>
+                      type="radio" >
+                      <%= i %>
+                    </label>
+                  </td>
+                  <% i = i + 1  %>
+                  <% end %>
+
+                </tr>
+
+                <% end %>
+              </table>
+            </div>
+          </div>
+
+
+
+
+
+
+          <% elsif question.checklist? %>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Question <%=index + 1 %></h3>
+            </div>
+            <div class="panel-body">
+              <%= question.body %>
+              <%= text_field_tag "data[q#{q_num}][question]", question.body, class:"hidden"  %>
+              <div class="checklist-options">
+
+                <% question.options.each_with_index do |option, index| %>
+                <div class="checkbox">
+                  <label>
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                    value= 0 >
+                    <input type="hidden" id="hidden-check" name=<%=     "data[q#{q_num}][response][opt#{index + 1}][content]" %>
+                    value= "<%= option.content %>" >
+
+                    <input type="checkbox" name=<%= "data[q#{q_num}][response][opt#{index + 1}][value]" %>
+                    value= 1>
+
+                    <%= option.content %>
+                  </label>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+
+          <% end %>
+          <%= submit_tag "Submit Entry", class: "btn btn-primary"%>
+        </div>
+        <% else %>
+
+            <h5>  There are no active surveys right now... Please contact the
+              researcher or try again later. </h5>
+
+        <% end %> <!-- if @survey end -->
+
+        <% end %> <!-- form tag end -->
+      </div>
+
+    <% end %> <!-- manager.employees.each do end -->
+
+  </div>
+
+    </div>
+
+
+</div>
+
+<script>
+
+  // $('form').on('submit', function(){
+  //   // console.log("form disabled")
+  //   $(this).find('input').attr("disabled", true)
+  // })
+</script>
