@@ -65,7 +65,6 @@ class ManagerSurveysController < ApplicationController
 
   def show
     @manager_survey = ManagerSurvey.find params[:id]
-
   end
 
 

@@ -102,7 +102,6 @@
   <div class="col-xs-2 toggle-wrapper">
     <input type="checkbox"
 
-    id="toggle"
     data-toggle="toggle"
     data-onstyle="success"
     data-offstyle="danger"
@@ -125,11 +124,16 @@
   //
   // })
 
-  $('#toggle').change(function(event) {
+  $('.toggle-wrapper input[type="checkbox"]').change(function(event) {
+
+
     window.location = $(this).data("link")
+
+
+    } )
+
     // console.log(event)
       // $('#console-event').html('Toggle: ' + $(this).prop('checked'))
-    })
 
 
 

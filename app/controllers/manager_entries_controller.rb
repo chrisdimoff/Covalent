@@ -2,7 +2,8 @@ class ManagerEntriesController < ApplicationController
   def new
     @manager = Manager.find params[:manager_id]
 
-    @survey = @manager.study.manager_surveys.last
+    # @survey = @manager.study.manager_surveys.last
+    @survey = @manager.study.manager_surveys.where(active: true).first
   end
 
   def create
@@ -11,9 +12,10 @@ class ManagerEntriesController < ApplicationController
         whitelisted['data'] = params['data']
     end
 
-    
+
     @study = @manager.study
-    @survey = @study.manager_surveys.last
+    # @survey = @study.manager_surveys.last
+    @survey = @study.manager_surveys.where(active: true).first
 
 
     @entry = Entry.new(content: entry_params, study: @study, manager: @manager, manager_survey: @survey)
