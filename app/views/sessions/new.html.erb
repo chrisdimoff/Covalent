@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-    <h1>Sign In</h1>
 
-    <%= form_tag sessions_path do %>
+    <div class="well">
+
+      <%= form_tag sessions_path do %>
+      <legend>Sign In</legend>
       <div class="form-group">
         <%= label_tag :email %>
         <%= text_field_tag :email, nil, class: "form-control" %>
@@ -11,7 +13,8 @@
         <%= label_tag :password %>
         <%= password_field_tag :password, nil, class: "form-control" %>
       </div>
-      <%= submit_tag 'Sign In', class: "btn btn-default" %>
-    <% end %>
+      <%= submit_tag 'Sign In', class: "btn btn-primary", style: "width: 50%" %>
+      <% end %>
+    </div>
   </div>
 </div>
