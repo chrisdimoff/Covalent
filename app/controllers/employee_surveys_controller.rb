@@ -38,7 +38,38 @@ class EmployeeSurveysController < ApplicationController
       end
   end
 
+  def set_status
+    @study = Study.find params[:study_id]
+    @employee_survey = EmployeeSurvey.find params[:id]
+
+    if @employee_survey.active == false
+      @employee_survey.update_attribute(:active, true)
+      status = "Activated"
+    else
+      status = "Deactivated"
+      @employee_survey.update_attribute(:active, false)
+    end
+
+    if @employee_survey.save
+      redirect_to study_path(@study), notice: "Survey #{status}"
+    else
+      render :index
+    end
+  end
+
+  def index
+    @study = Study.find params[:study_id]
+    @employee_surveys = @study.employee_surveys.order(created_at: :desc)
+  end
+
   def show
     @employee_survey = EmployeeSurvey.find params[:id]
+  end
+
+  def show_active
+    @study = Study.find params[:study_id]
+    @employee_survey = EmployeeSurvey.where(study_id: @study.id).where(active: true).first
+
+    render :show
   end
 end

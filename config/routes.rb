@@ -9,8 +9,11 @@ Rails.application.routes.draw do
     get '/managers-download' => 'downloads#all_managers', as: :all_managers_download
     get '/employees-download' => 'downloads#all_employees', as: :all_employees_download
     get '/manager_survey/:id/set_status' => 'manager_surveys#set_status', as: :set_manager_survey_status
+    get '/employee_survey/:id/set_status' => 'employee_surveys#set_status', as: :set_employee_survey_status
+    get 'manager_survey/active' => 'manager_surveys#show_active', as: :active_manager
+    get 'employee_survey/active' => 'employee_surveys#show_active', as: :active_employee
     resources :manager_surveys
-    resources :employee_surveys, only: [:show, :new, :create, :destroy]
+    resources :employee_surveys
   end
   resources :managers, only: [:show, :new, :create, :destroy] do
     get '/download' => 'downloads#ind_manager', as: :ind_download

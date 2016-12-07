@@ -263,10 +263,17 @@
 
               <%= link_to "Generate Manager Sign Up Link", manager_link_path(study: @study), class: "btn btn-primary", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default", method: :get %>
-              <% if @study.manager_surveys.present? %>
-                <%= link_to "View Manager Form", study_manager_survey_path(@study, @study.manager_surveys.last), class: "btn btn-default", method: :get %>
+
+              <% if @study.manager_surveys.where(active: true).present? %>
+                <%= link_to "View Active Manager Form", study_active_manager_path(@study ), class: "btn btn-default", method: :get %>
               <% else %>
-                <%= link_to "View Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default disabled", method: :get %>
+                <%= link_to "View Active Manager Form", new_study_manager_survey_path(@study), class: "btn btn-default disabled", method: :get %>
+              <% end %>
+
+              <% if @study.manager_surveys.present? %>
+                <%= link_to "View Manager Forms", study_manager_surveys_path(@study ), class: "btn btn-default", method: :get %>
+              <% else %>
+                <%= link_to "View Manager Forms", study_manager_surveys_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>
 
             </div>
@@ -275,10 +282,18 @@
             <div class="btn-group-vertical" style="width: 100%;">
               <%= link_to "Generate Employee Sign Up Link", employee_link_path(study: @study), class: "btn btn-primary", method: :get, remote: true, data: { toggle: "modal", target: "#modal-window" }%>
               <%= link_to "Create Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default", method: :get %>
-              <% if @study.employee_surveys.present? %>
-                <%= link_to "View Employee Form", study_employee_survey_path(@study, @study.employee_surveys.last), class: "btn btn-default", method: :get %>
+            
+
+              <% if @study.employee_surveys.where(active: true).present? %>
+                <%= link_to "View Active employee Form", study_active_employee_path(@study ), class: "btn btn-default", method: :get %>
               <% else %>
-                <%= link_to "View Employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
+                <%= link_to "View Active employee Form", new_study_employee_survey_path(@study), class: "btn btn-default disabled", method: :get %>
+              <% end %>
+
+              <% if @study.employee_surveys.present? %>
+                <%= link_to "View Employee Forms", study_employee_surveys_path(@study ), class: "btn btn-default", method: :get %>
+              <% else %>
+                <%= link_to "View Employee Forms", study_employee_surveys_path(@study), class: "btn btn-default disabled", method: :get %>
               <% end %>
             </div>
 
@@ -315,8 +330,11 @@
                         <% end %>
 
                       </li>
+
+
                      </ul>
               </div>
+
 
 
 

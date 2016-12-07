@@ -52,7 +52,7 @@ class ManagerSurveysController < ApplicationController
     end
 
     if @manager_survey.save
-      redirect_to study_manager_surveys_path(@study), notice: "Survey #{status}"
+      redirect_to study_path(@study), notice: "Survey #{status}"
     else
       render :index
     end
@@ -64,7 +64,17 @@ class ManagerSurveysController < ApplicationController
   end
 
   def show
+    @study = Study.find params[:study_id]
+    # @manager_survey = ManagerSurvey.where(study_id: @study.id).where(active: true)
     @manager_survey = ManagerSurvey.find params[:id]
+
+  end
+
+  def show_active
+    @study = Study.find params[:study_id]
+    @manager_survey = ManagerSurvey.where(study_id: @study.id).where(active: true).first
+
+    render :show
   end
 
 

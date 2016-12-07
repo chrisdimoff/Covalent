@@ -1,0 +1,140 @@
+
+<% @employee_surveys.each do |survey| %>
+<div class="row vcenter">
+  <div class="col-xs-7 col-xs-offset-2">
+    <div class="panel panel-primary survey-thumbnail">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= survey.form_name %>
+      </h3>
+
+      </div>
+      <div class="panel-body thumbnail-body">
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="well">
+
+              <legend><%= survey.form_name %></legend>
+              <% survey.questions.each_with_index do |question, index| %>
+              <% if question.mc? %>
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Question <%=index + 1 %></h3>
+                </div>
+                <div class="panel-body">
+                  <%= question.body %>
+                  <div class="mc-options">
+
+                    <% question.options.each do |option| %>
+                    <div class="radio">
+                      <label> <%= radio_button_tag 'rad', 'rad' %> <%= option.content  %> </label>
+
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% elsif question.matrix? %>
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Question <%=index + 1 %></h3>
+                </div>
+                <div class="panel-body">
+                  <%= question.body %>
+                  <table class="table table-condensed" id="matrix-table">
+                    <thead>
+                      <tr>
+                        <th class="first-heading matrix-headings-thumbnail"> </th>
+                        <% question.headings.each do |heading| %>
+                        <th class="matrix-headings-thumbnail"><%= heading %></th>
+                        <% end %>
+                      </tr>
+                    </thead>
+
+
+                    <% question.options.each_with_index do |option, index| %>
+                    <tr>
+                      <td><%= option.content %></td>
+                      <% i = 1 %>
+                      <% option.num_of_selections.times do  %>
+                      <td><label class="radio-inline"> <input name=<%= "#{index}"  %> type="radio" ><%= i %></label></td>
+                      <% i = i + 1  %>
+                      <% end %>
+
+                    </tr>
+
+                    <% end %>
+                  </table>
+                </div>
+              </div>
+              <% elsif question.checklist? %>
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Question <%=index + 1 %></h3>
+                </div>
+                <div class="panel-body">
+                  <%= question.body %>
+                  <div class="checklist-options">
+
+                    <% question.options.each do |option| %>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" value="">
+                        <%= option.content %>
+                      </label>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-2 toggle-wrapper">
+    <input type="checkbox"
+
+    data-toggle="toggle"
+    data-onstyle="success"
+    data-offstyle="danger"
+    data-size="normal"
+    data-on="Active"
+    data-off="Inactive"
+    data-link=<%= study_set_employee_survey_status_path(@study.id, survey.id) %>
+    <%= survey.checked %> >
+  </div>
+</div>
+<% end %>
+
+
+<script>
+  // $("checkbox").click(function() {
+  //   window.location = $(this).data("link")
+  // })
+  // $("tr[data-link]").hover(function() {
+  //   $(this).css('cursor','pointer');
+  //
+  // })
+
+  $('.toggle-wrapper input[type="checkbox"]').change(function(event) {
+
+
+    window.location = $(this).data("link")
+
+
+    } )
+
+    // console.log(event)
+      // $('#console-event').html('Toggle: ' + $(this).prop('checked'))
+
+
+
+</script>
