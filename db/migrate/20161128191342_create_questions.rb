@@ -4,6 +4,8 @@ class CreateQuestions < ActiveRecord::Migration[5.0]
       t.text :body
       t.string :type
       t.references :manager_survey, foreign_key: true
+      t.json     :matrix_headings,    default: []
+
 
       t.timestamps
     end
