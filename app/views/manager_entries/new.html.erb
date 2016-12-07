@@ -1,5 +1,10 @@
 
-<div class="row row-eq-height">
+<div class="entries-complete-alert alert alert-success" style="display: none">
+  All Entries Submitted! Redirecting to Home Page...
+</div>
+
+
+<div class="row row-eq-height submit-entry-view">
   <div class="col-xs-2 " > <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs tabs-left" style="height: 100vh">
@@ -11,6 +16,7 @@
 </div>
 
   <div class="col-xs-10 ">
+
     <% if @survey %>
     <div class="tab-content">
       <h1>
@@ -21,9 +27,13 @@
         <div id= <%= employee.id %> class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
 
           <h3>Reviewing: <%= employee.full_name %> </h3>
+          <div style="display: none" class="submitted-panel alert-success alert">
+
+            SUBMITTED
+
+          </div>
           <%= form_tag          manager_manager_entries_path(@manager, @entry),
           method: :post do %>
-
             <input
               type="hidden"
               name="target_person_id"
@@ -171,8 +181,23 @@
 
 <script>
 
-  // $('form').on('submit', function(){
-  //   // console.log("form disabled")
-  //   $(this).find('input').attr("disabled", true)
-  // })
+  var formCount = $('form').length
+  var submitCount = 0
+
+  $('form').on('submit', function(){
+    console.log("form disabled")
+    submitCount += 1
+    console.log(submitCount)
+    // console.log($(this).parents('.tab-content'))
+    $(this).hide()
+    $(this).parent('.tab-pane').find('.alert-success').show()
+
+    if (submitCount === formCount) {
+      $('.submit-entry-view').hide()
+      $('.entries-complete-alert').show()
+
+      setTimeout(function(){location.href = '/'}, 2500)
+    }
+
+  })
 </script>
