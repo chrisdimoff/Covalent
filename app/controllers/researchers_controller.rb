@@ -12,12 +12,12 @@ class ResearchersController < ApplicationController
     @researcher = Researcher.new researcher_params
     if @researcher.save
       session[:user_id] = @researcher.id
-      redirect_to root_path, notice: 'Thank you for signing up'
+      redirect_to studies_path, notice: 'Thank you for signing up'
     else
       render :new
     end
   end
 
-  
+
 
 end
