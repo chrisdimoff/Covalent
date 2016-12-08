@@ -38,6 +38,10 @@ class ManagersController < ApplicationController
 
   def show
 
+    @study = @manager.study
+    @employees = @manager.employees
+    @surveys = @study.manager_surveys.order(created_at: :asc)
+
   end
 
 

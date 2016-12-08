@@ -1,3 +1,55 @@
 <h1>Manager Show</h1>
 
 <%= @manager.full_name %>
+
+
+<div class="row row-eq-height">
+  <div class="col-xs-2 " > <!-- required for floating -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tabs-left" style="height: 100vh">
+      <% @employees.each_with_index do |emp, index| %>
+      <li class= "<%=  index == 0 ? 'active' : ''  %>"><a href= '#e<%= emp.id %>' data-toggle="tab"><%= emp.full_name %></a></li>
+
+      <% end %>
+    </ul>
+  </div>
+
+
+  <div class="col-xs-10">
+    <div class="tab-content">
+
+      <% @employees.each_with_index do |employee, index| %>
+        <div id= 'e<%= employee.id %>' class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
+
+          <%= employee.full_name %>
+
+          <ul class="nav nav-tabs">
+            <% @surveys.each_with_index do |survey, index| %>
+            <li class= "<%=  index == 0 ? 'active' : ''  %>">
+              <a href= '#s<%= survey.id %>' data-toggle="tab">
+                <%= survey.form_name %>
+              </a>
+            </li>
+
+          <% end %>
+          </ul>
+
+          <div class="tab-content">
+          <% @surveys.each_with_index do |survey, index| %> <!-- survey content -->
+
+            <div id= 's<%= survey.id %>' class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
+              SURVEY <%= survey.form_name %>
+              <%= employee.full_name %>
+
+
+            </div> <!-- end survey content-->
+          <% end %>
+          </div>
+
+
+        </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>
