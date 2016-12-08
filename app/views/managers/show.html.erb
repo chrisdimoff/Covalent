@@ -1,12 +1,7 @@
 
 
-<h1>Manager Show</h1>
-
-<%= @manager.full_name %>
-
-
 <div class="row row-eq-height">
-  <div class="col-xs-2 " > <!-- required for floating -->
+  <div class="col-xs-2 sidebar-left" > <!-- required for floating -->
     <!-- Nav tabs -->
     <ul class="nav nav-tabs tabs-left" style="height: 100vh">
       <% @employees.each_with_index do |emp, index| %>
@@ -24,7 +19,6 @@
       <% @employees.each_with_index do |employee, index| %>
         <div id= 'e<%= employee.id %>' class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
 
-          <%= employee.full_name %>
 
           <ul class="nav nav-tabs">
             <% @surveys.each_with_index do |survey, index| %>
@@ -38,6 +32,8 @@
           </ul>
 
           <div class="tab-content">
+            <br />
+
             <% @surveys.each_with_index do |survey, surv_index| %> <!-- survey content -->
               <div id= 's<%= survey.id %>-e<%= employee.id %>' class="tab-pane fade <%=  surv_index == 0 ? 'in active' : ''  %> ">
                 <% chart_data = {} %>
@@ -61,7 +57,6 @@
                     <% series_object['data'] = series_data %>
                     <%# entry_data_hash = {"entry#{index + 1}" => series_object} %>
                     <% chart_data[q_num].push(series_object) %>
-                    <br />
 
                   <% end %> <!-- entry.content['data'].each do -->
 
