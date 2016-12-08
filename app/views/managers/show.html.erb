@@ -40,9 +40,6 @@
           <div class="tab-content">
             <% @surveys.each_with_index do |survey, surv_index| %> <!-- survey content -->
               <div id= 's<%= survey.id %>-e<%= employee.id %>' class="tab-pane fade <%=  surv_index == 0 ? 'in active' : ''  %> ">
-                SURVEY <%= survey.form_name %>
-                <%= employee.full_name %>
-
                 <% chart_data = {} %>
                 <% question_names = [] %>
                 <% @entries.where(target_person_id: employee.id, manager_survey_id: survey.id).each_with_index do |entry, index| %>
@@ -80,9 +77,13 @@
                     <div class="panel panel-body">
                       <div id="container" style="width: 100%;">
 
-
-
-                        <%= bar_chart series_array, width: '100%',
+                        <% max = 0 %>
+                        <% series_array.each do |series_content| %>
+                          <% series_content['data'].each do |content, value| %>
+                            <% max = (value.to_i) if value.to_i > max %>
+                          <% end %>
+                        <% end %>
+                        <%= bar_chart series_array, width: '100%', max: max,
                         library: {
                                 yAxis: {
                                   labels: {
@@ -98,10 +99,6 @@
 
 
                 <% end %>
-
-
-                <%= chart_data %>
-                <%= question_names %>
 
 
               </div> <!-- end survey content-->
