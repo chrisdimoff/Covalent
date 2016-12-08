@@ -29,7 +29,7 @@
       end
 
       if @entry.save
-        redirect_to new_employee_employee_entry_path(@employee), notice: "Survey Response Received!"
+        redirect_to root_path, notice: "Survey Response Received!"
       else
         puts @entry.errors.full_messages
         render :new
