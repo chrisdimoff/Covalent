@@ -41,6 +41,33 @@
                 SURVEY <%= survey.form_name %>
                 <%= employee.full_name %>
 
+                <% chart_data = {} %>
+                <% @entries.where(target_person_id: employee.id, manager_survey_id: survey.id).each_with_index do |entry, index| %>
+                  <% entry.content['data'].each do |q_num, data_object| %>
+                    <% if chart_data.key?(q_num) == false %>
+                      <% chart_data[q_num] = [] %>
+                    <% end %>
+                    <% series_object = {} %>
+                    <% series_object['name'] = "Entry #{index +1}" %>
+                    <% series_data = {} %>
+
+                    <% data_object['response'].each do |opt_num, response_object| %>
+                      <% series_data[response_object['content']] = response_object['value']  %>
+
+                    <% end %>
+
+                    <% series_object['data'] = series_data %>
+                    <%# entry_data_hash = {"entry#{index + 1}" => series_object} %>
+                    <% chart_data[q_num].push(series_object) %>
+                    <br />
+
+                  <% end %> <!-- entry.content['data'].each do -->
+
+
+                <% end %> <!-- @entrie.each do -->
+                <%= chart_data %>
+
+
               </div> <!-- end survey content-->
             <% end %>
           </div>
