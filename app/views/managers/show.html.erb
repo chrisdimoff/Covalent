@@ -42,11 +42,14 @@
                 <%= employee.full_name %>
 
                 <% chart_data = {} %>
+                <% question_names = [] %>
                 <% @entries.where(target_person_id: employee.id, manager_survey_id: survey.id).each_with_index do |entry, index| %>
                   <% entry.content['data'].each do |q_num, data_object| %>
                     <% if chart_data.key?(q_num) == false %>
                       <% chart_data[q_num] = [] %>
+                      <% question_names.push(data_object['question'])%>
                     <% end %>
+
                     <% series_object = {} %>
                     <% series_object['name'] = "Entry #{index +1}" %>
                     <% series_data = {} %>
@@ -65,7 +68,18 @@
 
 
                 <% end %> <!-- @entrie.each do -->
+
+                <% chart_data.each do |q_num, series_array| %>
+                  <legend>
+                    <%= q_num %>
+                  </legend>
+
+                  <%= bar_chart series_array %>
+                <% end %>
+
+
                 <%= chart_data %>
+                <%= question_names %>
 
 
               </div> <!-- end survey content-->
