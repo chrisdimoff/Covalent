@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
     user = User.find_by_email params[:email].downcase
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      if user.type == "researcher"
-        redirect_to dashboard_path, notice: "Signed In"
+      if user.type.downcase == "researcher"
+        redirect_to studies_path, notice: "Signed In"
       else
         redirect_to root_path, notice: 'Signed In'
       end
