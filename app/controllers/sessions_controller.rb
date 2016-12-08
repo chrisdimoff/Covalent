@@ -20,6 +20,11 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: 'Signed out!'
+
+    if Rails.env.downcase == "production"
+      redirect_to unbounce_path
+    else
+      redirect_to root_path, notice: 'Signed out!'
+    end
   end
 end
