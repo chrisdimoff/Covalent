@@ -47,7 +47,8 @@ class EmployeesController < ApplicationController
 
     if @employee.save
       session[:user_id] = @employee.id
-      redirect_to root_path, notice: 'Thank you for signing up'
+      # redirect_to root_path, notice: 'Thank you for signing up'
+      redirect_to new_employee_employee_entry_path(@employee), notice: 'Thank you for signing up'
     else
       render :new
     end

@@ -5,7 +5,7 @@ class StudiesController < ApplicationController
   def index
     @studies = current_user.studies
 
-    
+
   end
 
   def new
@@ -78,7 +78,7 @@ class StudiesController < ApplicationController
   def authorize_access
     unless can? :manage, @study
       # head :unauthorized # this will send an empty HTTP response with 401 code
-      redirect_to root_path, alert: 'access denied'
+      redirect_to new_session_path, alert: 'access denied. Please sign in as researcher.'
     end
   end
 end
