@@ -1,3 +1,5 @@
+
+
 <h1>Manager Show</h1>
 
 <%= @manager.full_name %>
@@ -36,8 +38,8 @@
           </ul>
 
           <div class="tab-content">
-            <% @surveys.each_with_index do |survey, index| %> <!-- survey content -->
-              <div id= 's<%= survey.id %>-e<%= employee.id %>' class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
+            <% @surveys.each_with_index do |survey, surv_index| %> <!-- survey content -->
+              <div id= 's<%= survey.id %>-e<%= employee.id %>' class="tab-pane fade <%=  surv_index == 0 ? 'in active' : ''  %> ">
                 SURVEY <%= survey.form_name %>
                 <%= employee.full_name %>
 
@@ -70,11 +72,31 @@
                 <% end %> <!-- @entrie.each do -->
 
                 <% chart_data.each do |q_num, series_array| %>
-                  <legend>
-                    <%= q_num %>
-                  </legend>
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><%= q_num %></h3>
+                    </div>
 
-                  <%= bar_chart series_array %>
+                    <div class="panel panel-body">
+                      <div id="container" style="width: 100%;">
+
+
+
+                        <%= bar_chart series_array, width: '100%',
+                        library: {
+                                yAxis: {
+                                  labels: {
+                                    enabled: true,
+                                  },
+
+                                  allowDecimals: false
+                                }
+                              }%>
+                      </div>
+                    </div>
+                  </div>
+
+
                 <% end %>
 
 
@@ -93,3 +115,18 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  // $(window).trigger('resize')
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    console.log("tabddd")
+    $('div[data-highcharts-chart]').each(function(){
+        $(this).highcharts().reflow()
+    })
+  })
+
+
+
+</script>
