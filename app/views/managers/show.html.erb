@@ -1,3 +1,121 @@
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-2">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+        <h3 class="panel-title"> <%= @manager.full_name %></h3>
+      </div>
+
+      <div class="panel-body panel-collapse-wrapper">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Details</h3>
+              </div>
+
+              <div class="panel-body profile-panel">
+                <table class="table table-condensed table-hover profile-table">
+                  <tbody>
+                    <tr>
+                      <td> Email </td>
+                      <td>
+                                      <%= @manager.email %>
+                                      <i class="glyphicon glyphicon-send" aria-hidden="true" > </i> </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Entries
+                      </td>
+                      <td>
+                        <%= @entries.count %>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        # of Employees
+                      </td>
+                      <td>
+                        <%= @employees.count %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Date Signed Up
+                      </td>
+                      <td>
+                        <%= @manager.created_at %>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Last Entry
+                      </td>
+                      <td>
+                        <%= @entries.present? ? @entries.last.created_at : "--" %>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+
+                <h3 class="panel-title"> Employees </h3>
+              </div>
+              <div class="panel-body employee-panel">
+                <table class="table-condensed table-hover employee-list">
+                  <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>E-Mail</th>
+                    <th># of Entries</th>
+                  </tr>
+                  <tbody>
+                    <% @employees.each do |emp| %>
+                    <tr>
+                      <td>
+                        <%= emp.id %>
+                      </td>
+                      <td>
+                        <%= emp.first_name %>
+                      </td>
+                      <td>
+                        <%= emp.last_name %>
+                      </td>
+                      <td>
+                        <%= emp.email %>
+                      </td>
+                      <td>
+                        <%= emp.entries.count %>
+                      </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
 
 
 <div class="row row-eq-height">
@@ -34,6 +152,10 @@
           <div class="tab-content">
             <br />
 
+            <legend>
+              <%= "#{@manager.full_name}'s " %>responses for: <%= employee.full_name %>
+            </legend>
+
             <% @surveys.each_with_index do |survey, surv_index| %> <!-- survey content -->
               <div id= 's<%= survey.id %>-e<%= employee.id %>' class="tab-pane fade <%=  surv_index == 0 ? 'in active' : ''  %> ">
                 <% chart_data = {} %>
@@ -66,10 +188,11 @@
                 <% chart_data.each do |q_num, series_array| %>
                   <div class="panel panel-primary">
                     <div class="panel-heading">
+                      <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
                       <h3 class="panel-title"><%= q_num %></h3>
                     </div>
 
-                    <div class="panel panel-body">
+                    <div class="panel panel-body panel-collapse-wrapper">
                       <div id="container" style="width: 100%;">
 
                         <% max = 0 %>
@@ -119,6 +242,30 @@
     })
   })
 
+  var detailHeight = $('.profile-panel').height()
+  $('.employee-panel').height(detailHeight)
+  $('.employee-list').height(detailHeight - 10)
+
+  $(window).on('resize', function (){
+
+    var detailHeight = $('.profile-panel').height()
+    $('.employee-panel').height(detailHeight)
+    $('.employee-list').height(detailHeight - 10)
+  })
+
+
+  $(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-collapse-wrapper').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-collapse-wrapper').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
 
 
 </script>

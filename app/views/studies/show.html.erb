@@ -87,6 +87,7 @@
               <th>Id</th>
               <th>First Name</th>
               <th>Last Name</th>
+              <th>E-Mail</th>
               <th># of Employees</th>
               <th># of Entries</th>
               <th> Actions </th>
@@ -101,23 +102,27 @@
               <td> <%= mgr.id %></td>
               <td> <%= mgr.first_name %>   </td>
               <td> <%= mgr.last_name %>   </td>
+              <td> <%= mgr.email %>   </td>
               <td> <%= mgr.employees.count %>   </td>
               <td> <%= mgr.entries.count %>   </td>
 
+              <td>
               <% if mgr.entries.present? %>
-              <td> <%= link_to  manager_ind_download_path(mgr.id, :format => :xlsx), class: "btn btn-primary btn-xs" do %>
+                <%= link_to  manager_ind_download_path(mgr.id, :format => :xlsx), class: "btn btn-primary btn-xs" do %>
 
                         <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
                   <% end %>
-              </td>
               <% else %>
-              <td> <%= link_to  manager_ind_download_path(mgr.id, :format => :xlsx), class: "btn btn-primary btn-xs disabled" do %>
+                <%= link_to  manager_ind_download_path(mgr.id, :format => :xlsx), class: "btn btn-primary btn-xs disabled" do %>
 
                         <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
                   <% end %>
-              </td>
 
               <% end %>
+                <%= link_to  manager_path(mgr.id), class: "btn btn-primary btn-xs " do%>
+                  <i class="glyphicon glyphicon-user" aria-hidden="true" > </i>
+                <% end %>
+              </td>
             </tr>
 
             <% end %>
@@ -209,6 +214,7 @@
               <th>Id</th>
               <th>First Name</th>
               <th>Last Name</th>
+              <th>E-Mail</th>
               <th>Manager</th>
               <th># of Entries</th>
               <th>Actions</th>
@@ -222,6 +228,7 @@
               <td> <%= emp.id %></td>
               <td> <%= emp.first_name %>   </td>
               <td> <%= emp.last_name %>   </td>
+              <td> <%= emp.email %>   </td>
               <td> <%= emp.manager.full_name %>   </td>
               <td> <%= emp.entries.count %>   </td>
               <% if emp.entries.present? %>
