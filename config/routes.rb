@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'links/manager' => 'links#manager', as: :manager_link
 
   get 'links/employee' => 'links#employee', as: :employee_link
+  get 'studies/:id/inactive-managers' => 'studies#manager_inactive_show', as: :manager_inactive_show
+  get 'studies/:id/inactive-employees' => 'studies#employee_inactive_show', as: :employee_inactive_show
 
 
   resources :studies do

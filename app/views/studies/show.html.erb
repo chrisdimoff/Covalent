@@ -7,6 +7,7 @@
 </div>
 
 
+
 <div class ="row">
   <div class="col-sm-9">
 
@@ -165,7 +166,7 @@
                 </div>
                 <div class="panel-footer" >
                   <div class="flex-row">
-                    <%= link_to "View Details", nil, class:"panel-link" %>
+                    <%= link_to "View Details", employee_inactive_show_path(study: @study, employees_with_no_entries: @employees_with_no_entries) , class:"panel-link", remote: true, method: :get, data: { toggle: "modal", target: "#modal-window" } %>
                   </div>
                 </div>
               </div>
@@ -251,7 +252,7 @@
 
 
 
-            
+
             </tr>
 
             <% end %>

@@ -34,10 +34,12 @@ class StudiesController < ApplicationController
     # logic to count employees for chart
     if @study.num_of_employees
       @employees_signed_up_active = 0
+      @employees_with_no_entries = []
       @study.employees.each do |emp|
         num_of_entries = emp.entries.where(study_id: @study.id).count
         if  num_of_entries > 0
 
+          @employees_with_no_entries.push(emp)
           @employees_signed_up_active += 1
         end
       end
@@ -61,6 +63,35 @@ class StudiesController < ApplicationController
 
   end
 
+  def employee_inactive_show
+    @study = Study.find params[:study]
+
+    # logic to count employees for chart
+    if @study.num_of_employees
+      @employees_signed_up_active = 0
+      @employees_with_no_entries = []
+      @study.employees.each do |emp|
+        num_of_entries = emp.entries.where(study_id: @study.id).count
+        if  num_of_entries > 0
+
+          @employees_with_no_entries.push(emp)
+          @employees_signed_up_active += 1
+        end
+      end
+    end
+    respond_to do |format|
+      format.html
+      format.js {render :employee_inactive}
+    end
+  end
+
+  def manager_inactive_show
+    @study = Study.find params[:study]
+    respond_to do |format|
+      format.html
+      format.js {render :manager_inactive}
+    end
+  end
 
   def destroy
   end
