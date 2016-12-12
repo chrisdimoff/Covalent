@@ -10,17 +10,18 @@ wb = xlsx_package.workbook
     q_with_options = ["Entry Date"]
     option_content_headings = [" "]
 
-    # build question headings based on first entry
-    survey.entries.where(manager_id: @manager.id)
-    .first.content['data'].each do |q_num, data_object|
+    if survey.entries.where(manager_id: @manager.id).first.present?
+      # build question headings based on first entry
+      survey.entries.where(manager_id: @manager.id)
+      .first.content['data'].each do |q_num, data_object|
 
-      data_object['response'].each do |opt_num, option_data|
-        q_with_options.push("#{q_num}_#{opt_num}")
-        option_content_headings.push(option_data['content'])
+        data_object['response'].each do |opt_num, option_data|
+          q_with_options.push("#{q_num}_#{opt_num}")
+          option_content_headings.push(option_data['content'])
 
+        end
       end
     end
-
 
 
     # make manager info (entire second row)

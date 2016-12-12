@@ -231,18 +231,27 @@
               <td> <%= emp.email %>   </td>
               <td> <%= emp.manager.full_name %>   </td>
               <td> <%= emp.entries.count %>   </td>
+              <td>
               <% if emp.entries.present? %>
-                <td> <%= link_to  employee_ind_download_path(emp.id, :format => :xlsx), class: "btn btn-primary btn-xs" do %>
+                <%= link_to  employee_ind_download_path(emp.id, :format => :xlsx), class: "btn btn-primary btn-xs" do %>
 
                         <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
                   <% end %>
-                </td>
               <% else %>
-              <td> <%= link_to  employee_ind_download_path(emp.id, :format => :xlsx), class: "btn btn-primary disabled btn-xs" do%>
-                  <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
+                <%= link_to  employee_ind_download_path(emp.id, :format => :xlsx), class: "btn btn-primary btn-xs disabled" do %>
+
+                        <i class="glyphicon glyphicon-download-alt" aria-hidden="true" > </i>
+                  <% end %>
+
+              <% end %>
+                <%= link_to  employee_path(emp.id), class: "btn btn-primary btn-xs " do%>
+                  <i class="glyphicon glyphicon-user" aria-hidden="true" > </i>
                 <% end %>
               </td>
-              <% end %>
+
+
+
+            
             </tr>
 
             <% end %>

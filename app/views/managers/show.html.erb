@@ -3,11 +3,11 @@
 
     <div class="panel panel-primary">
       <div class="panel-heading">
-          <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+          <span class="pull-right clickable" ><i class="glyphicon glyphicon-chevron-up"></i></span>
         <h3 class="panel-title"> <%= @manager.full_name %></h3>
       </div>
 
-      <div class="panel-body panel-collapse-wrapper">
+      <div class="panel-body panel-collapse-wrapper" >
         <div class="row">
           <div class="col-sm-4">
             <div class="panel panel-default">
@@ -235,42 +235,60 @@
 
   // $(window).trigger('resize')
 
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    console.log("tabddd")
-    $('div[data-highcharts-chart]').each(function(){
-        $(this).highcharts().reflow()
-    })
-  })
 
-  var detailHeight = $('.profile-panel').height()
-  $('.employee-panel').height(detailHeight)
-  $('.employee-list').height(detailHeight - 10)
+  // var detailHeight = $('.profile-panel').height()
+  // $('.employee-panel').height(detailHeight)
+  // $('.employee-list').height(detailHeight - 10)
 
-  $(window).on('resize', function (){
-
-    var detailHeight = $('.profile-panel').height()
-    $('.employee-panel').height(detailHeight)
-    $('.employee-list').height(detailHeight - 10)
-  })
+  // $(window).on('resize', function (){
+    //
+    // var detailHeight = $('.profile-panel').height()
+    // $('.employee-panel').height(detailHeight)
+    // $('.employee-list').height(detailHeight - 10)
+  // })
 
 
-  $(document).on('click', '.panel-heading span.clickable', function(e){
+//   $(document).on('click', '.panel-heading span.clickable', function(e){
+//     var $this = $(this);
+// 	if(!$this.hasClass('panel-collapsed')) {
+// 		$this.parents('.panel').find('.panel-collapse-wrapper').slideUp();
+//     // $('.employee-panel').height(0)
+// 		$this.addClass('panel-collapsed');
+//
+// 		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+// 	} else {
+// 		$this.parents('.panel').find('.panel-collapse-wrapper').slideDown();
+//
+//     // var detailHeight = $('.profile-panel').height()
+//     // $('.employee-panel').height(detailHeight)
+//     // $('.employee-list').height(detailHeight - 10)
+// 		$this.removeClass('panel-collapsed');
+// 		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+// 	}
+// })
+
+
+  $('.panel').on('click', '.panel-heading span.clickable', function(e){
     var $this = $(this);
-	if(!$this.hasClass('panel-collapsed')) {
-		$this.parents('.panel').find('.panel-collapse-wrapper').slideUp();
-    $('.employee-panel').height(0)
-		$this.addClass('panel-collapsed');
+    if(!$this.hasClass('panel-collapsed')) {
+      $this.addClass('panel-collapsed');
+      $this.parents('.panel').find('.panel-collapse-wrapper').slideUp();
+      console.log("up")
+      $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+    } else {
+      $this.removeClass('panel-collapsed');
+      $this.parents('.panel').find('.panel-collapse-wrapper').slideDown();
+      console.log("down")
+      $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+    }
+  })
 
-		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-	} else {
-		$this.parents('.panel').find('.panel-collapse-wrapper').slideDown();
 
-    var detailHeight = $('.profile-panel').height()
-    $('.employee-panel').height(detailHeight)
-    $('.employee-list').height(detailHeight - 10)
-		$this.removeClass('panel-collapsed');
-		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
-	}
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  // console.log("tabddd")
+  $('div[data-highcharts-chart]').each(function(){
+      $(this).highcharts().reflow()
+  })
 })
 
 
