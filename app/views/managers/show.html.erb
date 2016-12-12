@@ -258,10 +258,16 @@
     var $this = $(this);
 	if(!$this.hasClass('panel-collapsed')) {
 		$this.parents('.panel').find('.panel-collapse-wrapper').slideUp();
+    $('.employee-panel').height(0)
 		$this.addClass('panel-collapsed');
+
 		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
 	} else {
 		$this.parents('.panel').find('.panel-collapse-wrapper').slideDown();
+
+    var detailHeight = $('.profile-panel').height()
+    $('.employee-panel').height(detailHeight)
+    $('.employee-list').height(detailHeight - 10)
 		$this.removeClass('panel-collapsed');
 		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
 	}

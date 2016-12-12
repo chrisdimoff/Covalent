@@ -1,6 +1,11 @@
 class EmployeesController < ApplicationController
   def show
     @employee = Employee.find params[:id]
+    @manager = @employee.manager
+    @study = @employee.study
+    @surveys = @study.employee_surveys.order(created_at: :asc)
+    @entries = @employee.entries.where(study_id: @study.id).order(created_at: :asc)
+
   end
 
   def new
