@@ -4,8 +4,18 @@
 
 
 
-.widget-modal {
-  width: 100%;
+#widget-modal {
+  display: none;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: auto;
+  width: 80%;
+  right: 10%;
+  bottom: auto;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
 }
 
 .check-wrapper-builder {

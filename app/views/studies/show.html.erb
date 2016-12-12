@@ -6,6 +6,10 @@
 <div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 </div>
 
+<div id="widget-modal" class="fade modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+
 
 
 <div class ="row">
@@ -46,7 +50,7 @@
                 </div>
                 <div class="panel-footer" >
                   <div class="flex-row">
-                    <%= link_to "View Details", nil, class:"panel-link" %>
+                    <%= link_to "View Details", manager_inactive_show_path(study: @study, managers_with_no_entries: @managers_with_no_entries) , class:"panel-link", remote: true, method: :get, data: { toggle: "modal", target: "#widget-modal" } %>
                   </div>
                 </div>
               </div>
@@ -166,7 +170,7 @@
                 </div>
                 <div class="panel-footer" >
                   <div class="flex-row">
-                    <%= link_to "View Details", employee_inactive_show_path(study: @study, employees_with_no_entries: @employees_with_no_entries) , class:"panel-link", remote: true, method: :get, data: { toggle: "modal", target: "#modal-window" } %>
+                    <%= link_to "View Details", employee_inactive_show_path(study: @study, employees_with_no_entries: @employees_with_no_entries) , class:"panel-link", remote: true, method: :get, data: { toggle: "modal", target: "#widget-modal" } %>
                   </div>
                 </div>
               </div>

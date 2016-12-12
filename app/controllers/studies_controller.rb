@@ -87,6 +87,19 @@ class StudiesController < ApplicationController
 
   def manager_inactive_show
     @study = Study.find params[:study]
+    if @study.num_of_managers
+      @inactive_managers = []
+      @managers_with_no_entries = []
+      @study.managers.each do |mgr|
+        num_of_entries = mgr.entries.where(study_id: @study.id).count
+        if  num_of_entries == 0
+
+          @managers_with_no_entries.push(mgr)
+          @inactive_managers.push(mgr)
+        end
+      end
+    
+    end
     respond_to do |format|
       format.html
       format.js {render :manager_inactive}
