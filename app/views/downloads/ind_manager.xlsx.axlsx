@@ -34,7 +34,7 @@ wb = xlsx_package.workbook
     @manager.employees.each do |emp|
 
       # count max num_of_entries
-      num_of_entries = @manager.entries.where(target_person_id: emp.id).count
+      num_of_entries = @manager.entries.where(target_person_id: emp.id, manager_survey_id: survey.id).count
        if num_of_entries > max_entries
          max_entries = num_of_entries
        end

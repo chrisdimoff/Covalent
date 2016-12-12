@@ -16,7 +16,7 @@ class DownloadsController < ApplicationController
 
   def ind_manager
     @study = @manager.study
-    @surveys = @study.manager_surveys
+    @surveys = @study.manager_surveys.order(created_at: :asc)
     respond_to do |format|
     format.html # don't forget if you pass html
     format.xlsx {
@@ -69,7 +69,7 @@ class DownloadsController < ApplicationController
   def find_manager
     @manager = User.find params[:manager_id]
   end
-  
+
   def find_employee
     @employee = User.find params[:employee_id]
   end
