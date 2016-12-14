@@ -107,7 +107,7 @@
               <td> <%= mgr.id %></td>
               <td> <%= mgr.first_name %>   </td>
               <td> <%= mgr.last_name %>   </td>
-              <td> <%= mgr.email %>   </td>
+              <td> <%= mail_to mgr.email %>   </td>
               <td> <%= mgr.employees.count %>   </td>
               <td> <%= mgr.entries.count %>   </td>
 
@@ -233,7 +233,7 @@
               <td> <%= emp.id %></td>
               <td> <%= emp.first_name %>   </td>
               <td> <%= emp.last_name %>   </td>
-              <td> <%= emp.email %>   </td>
+              <td> <%= mail_to emp.email %>   </td>
               <td> <%= emp.manager.full_name %>   </td>
               <td> <%= emp.entries.count %>   </td>
               <td>
