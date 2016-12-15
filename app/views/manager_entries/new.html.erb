@@ -19,14 +19,11 @@
 
     <% if @survey %>
     <div class="tab-content">
-      <h1>
-        Hello, <%= @manager.first_name.capitalize %>
-      </h1>
 
       <% @manager.employees.each_with_index do |employee, index| %>
         <div id= <%= employee.id %> class="tab-pane fade <%=  index == 0 ? 'in active' : ''  %> ">
 
-          <h3>Reviewing: <%= employee.full_name %> </h3>
+          <legend>Reviewing: <%= employee.full_name %> </legend>
           <div style="display: none" class="submitted-panel alert-success alert">
 
             SUBMITTED

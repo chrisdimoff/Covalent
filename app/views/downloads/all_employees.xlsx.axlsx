@@ -60,12 +60,6 @@ wb = xlsx_package.workbook
       # end #mgr.employees.each
 
 
-
-      # sheet.add_row(manager_info)
-      # employee_rows.each do |emp_row|
-      #   sheet.add_row(emp_row)
-      # end
-
       employee_manager_content[employee_info] = manager_rows
 
 
