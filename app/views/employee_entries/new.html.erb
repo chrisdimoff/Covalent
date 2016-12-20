@@ -4,7 +4,6 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <% if @survey %>
-    <h1>Hello, <%= @employee.first_name.capitalize %> </h1>
     <%= form_tag employee_employee_entries_path(@employee, @entry), method: :post %>
       <input type="hidden" name="target_person_id" value = <%= @employee.manager.id %>>
 

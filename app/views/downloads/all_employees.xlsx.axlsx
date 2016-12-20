@@ -57,7 +57,6 @@ wb = xlsx_package.workbook
 
         #add response row to employee_rows array
         manager_rows.push(response_row)
-      # end #mgr.employees.each
 
 
       employee_manager_content[employee_info] = manager_rows
